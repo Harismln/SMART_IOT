@@ -21,49 +21,49 @@
         body { font-family: 'Plus Jakarta Sans', sans-serif; }
     </style>
 </head>
-<body class="bg-slate-100 dark:bg-[#090d16] text-slate-800 dark:text-slate-100 min-h-screen flex flex-col antialiased transition-colors duration-300">
+<body class="bg-slate-100 dark:bg-[#0f0913] text-slate-800 dark:text-slate-100 min-h-screen flex flex-col antialiased transition-colors duration-300">
 
     <!-- Header / Navbar -->
-    <header class="border-b border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-[#0d1322]/80 backdrop-blur-md sticky top-0 z-50 transition-colors duration-300">
+    <header class="border-b border-slate-200 dark:border-pink-950/40 bg-white/80 dark:bg-[#130b18]/80 backdrop-blur-md sticky top-0 z-50 transition-colors duration-300">
         <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center gap-4">
             
             <div class="flex items-center gap-3">
                 <!-- Tombol Menu Hamburger (Titik 3 / Garis 3 di Pojok Kiri) -->
                 <div class="relative">
-                    <button onclick="toggleMenuDropdown()" class="p-2.5 bg-slate-200 dark:bg-slate-900 border border-slate-300 dark:border-slate-800 rounded-xl text-slate-700 dark:text-slate-300 hover:bg-slate-300 dark:hover:bg-slate-800 transition-all" title="Menu">
+                    <button onclick="toggleMenuDropdown()" class="p-2.5 bg-slate-200 dark:bg-pink-950/40 border border-slate-300 dark:border-pink-900/40 rounded-xl text-slate-700 dark:text-pink-300 hover:bg-slate-300 dark:hover:bg-pink-900/40 transition-all" title="Menu">
                         <i data-lucide="more-vertical" class="w-5 h-5"></i>
                     </button>
                     
                     <!-- Dropdown Menu -->
-                    <div id="menu-dropdown" class="hidden absolute left-0 mt-2 w-48 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-xl py-2 z-50">
-                        <button onclick="switchTab('live'); toggleMenuDropdown();" class="w-full text-left flex items-center gap-3 px-4 py-2.5 text-xs font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all">
-                            <i data-lucide="activity" class="w-4 h-4 text-blue-500"></i> <span data-i18n="menuLive">Live Monitoring</span>
+                    <div id="menu-dropdown" class="hidden absolute left-0 mt-2 w-48 bg-white dark:bg-[#160d1d] border border-slate-200 dark:border-pink-950 rounded-2xl shadow-xl py-2 z-50">
+                        <button onclick="switchTab('live'); toggleMenuDropdown();" class="w-full text-left flex items-center gap-3 px-4 py-2.5 text-xs font-semibold text-slate-700 dark:text-slate-300 hover:bg-pink-50 dark:hover:bg-pink-950/50 transition-all">
+                            <i data-lucide="activity" class="w-4 h-4 text-pink-500"></i> <span data-i18n="menuLive">Live Monitoring</span>
                         </button>
-                        <button onclick="switchTab('control'); toggleMenuDropdown();" class="w-full text-left flex items-center gap-3 px-4 py-2.5 text-xs font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all">
-                            <i data-lucide="sliders" class="w-4 h-4 text-blue-500"></i> <span data-i18n="menuControl">Kontrol & Mode</span>
+                        <button onclick="switchTab('control'); toggleMenuDropdown();" class="w-full text-left flex items-center gap-3 px-4 py-2.5 text-xs font-semibold text-slate-700 dark:text-slate-300 hover:bg-pink-50 dark:hover:bg-pink-950/50 transition-all">
+                            <i data-lucide="sliders" class="w-4 h-4 text-pink-500"></i> <span data-i18n="menuControl">Kontrol & Mode</span>
                         </button>
-                        <button onclick="switchTab('history'); toggleMenuDropdown();" class="w-full text-left flex items-center gap-3 px-4 py-2.5 text-xs font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all">
-                            <i data-lucide="calendar" class="w-4 h-4 text-blue-500"></i> <span data-i18n="menuHistory">Riwayat Harian</span>
+                        <button onclick="switchTab('history'); toggleMenuDropdown();" class="w-full text-left flex items-center gap-3 px-4 py-2.5 text-xs font-semibold text-slate-700 dark:text-slate-300 hover:bg-pink-50 dark:hover:bg-pink-950/50 transition-all">
+                            <i data-lucide="calendar" class="w-4 h-4 text-pink-500"></i> <span data-i18n="menuHistory">Riwayat Harian</span>
                         </button>
-                        <button onclick="switchTab('settings'); toggleMenuDropdown();" class="w-full text-left flex items-center gap-3 px-4 py-2.5 text-xs font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all">
-                            <i data-lucide="settings" class="w-4 h-4 text-blue-500"></i> <span data-i18n="menuSettings">Pengaturan</span>
+                        <button onclick="switchTab('settings'); toggleMenuDropdown();" class="w-full text-left flex items-center gap-3 px-4 py-2.5 text-xs font-semibold text-slate-700 dark:text-slate-300 hover:bg-pink-50 dark:hover:bg-pink-950/50 transition-all">
+                            <i data-lucide="settings" class="w-4 h-4 text-pink-500"></i> <span data-i18n="menuSettings">Pengaturan</span>
                         </button>
                     </div>
                 </div>
 
                 <div class="flex items-center gap-3">
-                    <div class="p-2.5 bg-blue-500/10 border border-blue-500/20 rounded-xl text-blue-500 dark:text-blue-400">
-                        <i data-lucide="zap" class="w-6 h-6"></i>
+                    <div class="p-2.5 bg-pink-500/10 border border-pink-500/20 rounded-xl text-pink-500 dark:text-pink-400">
+                        <i data-lucide="sparkles" class="w-6 h-6"></i>
                     </div>
                     <div>
-                        <h1 class="text-xl font-bold bg-gradient-to-r from-blue-600 to-emerald-600 dark:from-blue-400 dark:to-emerald-400 bg-clip-text text-transparent">Smart Lighting IoT</h1>
-                        <p class="text-xs text-slate-500 dark:text-slate-400" data-i18n="subtitle">Monitoring & Control System</p>
+                        <h1 class="text-xl font-bold bg-gradient-to-r from-pink-500 via-rose-500 to-purple-500 bg-clip-text text-transparent">Smart Lighting IoT</h1>
+                        <p class="text-xs text-slate-500 dark:text-pink-300/60" data-i18n="subtitle">Monitoring & Control System</p>
                     </div>
                 </div>
             </div>
 
             <!-- Tombol Toggle Tema (Dark/Light Mode) di Kanan -->
-            <button onclick="toggleTheme()" class="p-2.5 bg-slate-200 dark:bg-slate-900 border border-slate-300 dark:border-slate-800 rounded-xl text-slate-700 dark:text-slate-300 hover:bg-slate-300 dark:hover:bg-slate-800 transition-all" title="Ubah Tema">
+            <button onclick="toggleTheme()" class="p-2.5 bg-slate-200 dark:bg-pink-950/40 border border-slate-300 dark:border-pink-900/40 rounded-xl text-slate-700 dark:text-pink-300 hover:bg-slate-300 dark:hover:bg-pink-900/40 transition-all" title="Ubah Tema">
                 <i data-lucide="sun" class="w-5 h-5 hidden dark:block"></i>
                 <i data-lucide="moon" class="w-5 h-5 block dark:hidden"></i>
             </button>
@@ -80,10 +80,10 @@
         <section id="content-live" class="space-y-6">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <!-- Status Lampu -->
-                <div class="bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800/80 backdrop-blur-xl p-6 rounded-3xl shadow-xl transition-colors duration-300">
+                <div class="bg-white dark:bg-[#130b18]/60 border border-slate-200 dark:border-pink-950/60 backdrop-blur-xl p-6 rounded-3xl shadow-xl transition-colors duration-300">
                     <div class="flex justify-between items-center mb-4">
-                        <span class="text-sm font-medium text-slate-500 dark:text-slate-400" data-i18n="lampStatus">Status Lampu AC</span>
-                        <div class="p-2.5 rounded-2xl bg-slate-100 dark:bg-slate-800/50 text-blue-500 dark:text-blue-400 border border-slate-200 dark:border-slate-700/50">
+                        <span class="text-sm font-medium text-slate-500 dark:text-pink-200/70" data-i18n="lampStatus">Status Lampu AC</span>
+                        <div class="p-2.5 rounded-2xl bg-pink-50 dark:bg-pink-950/50 text-pink-500 dark:text-pink-400 border border-pink-100 dark:border-pink-900/40">
                             <i data-lucide="lightbulb" class="w-5 h-5"></i>
                         </div>
                     </div>
@@ -91,78 +91,78 @@
                         <span id="lampu-dot" class="w-2 h-2 rounded-full bg-rose-500"></span>
                         <span id="text-lampu">MEMUAT...</span>
                     </div>
-                    <p id="label-mode-status" class="text-xs text-slate-400 dark:text-slate-500 mt-4">Mode: Memuat...</p>
+                    <p id="label-mode-status" class="text-xs text-slate-400 dark:text-pink-300/50 mt-4">Mode: Memuat...</p>
                 </div>
 
                 <!-- Sensor LDR -->
-                <div class="bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800/80 backdrop-blur-xl p-6 rounded-3xl shadow-xl transition-colors duration-300">
+                <div class="bg-white dark:bg-[#130b18]/60 border border-slate-200 dark:border-pink-950/60 backdrop-blur-xl p-6 rounded-3xl shadow-xl transition-colors duration-300">
                     <div class="flex justify-between items-center mb-4">
-                        <span class="text-sm font-medium text-slate-500 dark:text-slate-400" data-i18n="ldrTitle">Intensitas Cahaya (LDR AO)</span>
-                        <div class="p-2.5 rounded-2xl bg-slate-100 dark:bg-slate-800/50 text-amber-500 dark:text-amber-400 border border-slate-200 dark:border-slate-700/50">
+                        <span class="text-sm font-medium text-slate-500 dark:text-pink-200/70" data-i18n="ldrTitle">Intensitas Cahaya (LDR AO)</span>
+                        <div class="p-2.5 rounded-2xl bg-pink-50 dark:bg-pink-950/50 text-rose-500 dark:text-rose-400 border border-pink-100 dark:border-pink-900/40">
                             <i data-lucide="sun" class="w-5 h-5"></i>
                         </div>
                     </div>
                     <div class="flex items-baseline gap-2">
                         <span id="val-ldr" class="text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white">-</span>
-                        <span class="text-xs text-slate-400 dark:text-slate-500 font-medium">ADC (0-4095)</span>
+                        <span class="text-xs text-slate-400 dark:text-pink-300/50 font-medium">ADC (0-4095)</span>
                     </div>
                     <div class="mt-4">
-                        <div class="w-full bg-slate-200 dark:bg-slate-800 h-2 rounded-full overflow-hidden">
-                            <div id="ldr-bar" class="bg-amber-500 dark:bg-amber-400 h-full w-0 transition-all duration-500"></div>
+                        <div class="w-full bg-slate-200 dark:bg-pink-950/80 h-2 rounded-full overflow-hidden">
+                            <div id="ldr-bar" class="bg-gradient-to-r from-pink-500 to-rose-500 h-full w-0 transition-all duration-500"></div>
                         </div>
                     </div>
                 </div>
 
                 <!-- Sensor PIR -->
-                <div class="bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800/80 backdrop-blur-xl p-6 rounded-3xl shadow-xl transition-colors duration-300">
+                <div class="bg-white dark:bg-[#130b18]/60 border border-slate-200 dark:border-pink-950/60 backdrop-blur-xl p-6 rounded-3xl shadow-xl transition-colors duration-300">
                     <div class="flex justify-between items-center mb-4">
-                        <span class="text-sm font-medium text-slate-500 dark:text-slate-400" data-i18n="pirTitle">Deteksi Gerakan (PIR)</span>
-                        <div class="p-2.5 rounded-2xl bg-slate-100 dark:bg-slate-800/50 text-emerald-500 dark:text-emerald-400 border border-slate-200 dark:border-slate-700/50">
+                        <span class="text-sm font-medium text-slate-500 dark:text-pink-200/70" data-i18n="pirTitle">Deteksi Gerakan (PIR)</span>
+                        <div class="p-2.5 rounded-2xl bg-pink-50 dark:bg-pink-950/50 text-purple-500 dark:text-purple-400 border border-pink-100 dark:border-pink-900/40">
                             <i data-lucide="user" class="w-5 h-5"></i>
                         </div>
                     </div>
-                    <div id="pir-badge" class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold tracking-wider uppercase bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border border-slate-300 dark:border-slate-700">
-                        <span id="dot-pir" class="w-2 h-2 rounded-full bg-slate-400 dark:bg-slate-500"></span>
+                    <div id="pir-badge" class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold tracking-wider uppercase bg-slate-200 dark:bg-pink-950/60 text-slate-600 dark:text-pink-300 border border-slate-300 dark:border-pink-900/50">
+                        <span id="dot-pir" class="w-2 h-2 rounded-full bg-slate-400 dark:bg-pink-400"></span>
                         <span id="text-pir">MEMUAT...</span>
                     </div>
-                    <p class="text-xs text-slate-400 dark:text-slate-500 mt-4" data-i18n="pirSub">Status Keberadaan Orang</p>
+                    <p class="text-xs text-slate-400 dark:text-pink-300/50 mt-4" data-i18n="pirSub">Status Keberadaan Orang</p>
                 </div>
             </div>
 
             <!-- Energy Consumption -->
-            <div class="bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800/80 backdrop-blur-xl p-8 rounded-3xl shadow-xl transition-colors duration-300">
+            <div class="bg-white dark:bg-[#130b18]/60 border border-slate-200 dark:border-pink-950/60 backdrop-blur-xl p-8 rounded-3xl shadow-xl transition-colors duration-300">
                 <div class="flex items-center justify-between mb-6">
                     <div>
                         <h2 class="text-lg font-bold text-slate-900 dark:text-white" data-i18n="energyTitle">Akumulasi Energi & Biaya</h2>
-                        <p class="text-xs text-slate-500 dark:text-slate-400" data-i18n="energySub">Perhitungan otomatis berdasarkan riwayat Firebase</p>
+                        <p class="text-xs text-slate-500 dark:text-pink-300/60" data-i18n="energySub">Perhitungan otomatis berdasarkan riwayat Firebase</p>
                     </div>
-                    <div class="p-2 rounded-xl bg-emerald-500/10 text-emerald-500 dark:text-emerald-400 border border-emerald-500/20">
+                    <div class="p-2 rounded-xl bg-pink-500/10 text-pink-500 dark:text-pink-400 border border-pink-500/20">
                         <i data-lucide="trending-up" class="w-5 h-5"></i>
                     </div>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-2">
-                    <div class="bg-slate-50 dark:bg-slate-950/40 border border-slate-200 dark:border-slate-800/60 p-5 rounded-2xl">
-                        <span class="text-xs font-medium text-slate-500 dark:text-slate-400" data-i18n="totalHours">Total Jam Menyala</span>
+                    <div class="bg-slate-50 dark:bg-pink-950/20 border border-slate-200 dark:border-pink-900/30 p-5 rounded-2xl">
+                        <span class="text-xs font-medium text-slate-500 dark:text-pink-200/70" data-i18n="totalHours">Total Jam Menyala</span>
                         <div class="flex items-baseline gap-2 mt-2">
-                            <span id="total-jam" class="text-3xl font-extrabold text-blue-600 dark:text-blue-400">0.00</span>
-                            <span class="text-xs text-slate-400 dark:text-slate-500" data-i18n="hoursUnit">Jam</span>
+                            <span id="total-jam" class="text-3xl font-extrabold text-pink-600 dark:text-pink-400">0.00</span>
+                            <span class="text-xs text-slate-400 dark:text-pink-300/50" data-i18n="hoursUnit">Jam</span>
                         </div>
                     </div>
 
-                    <div class="bg-slate-50 dark:bg-slate-950/40 border border-slate-200 dark:border-slate-800/60 p-5 rounded-2xl">
-                        <span class="text-xs font-medium text-slate-500 dark:text-slate-400" data-i18n="totalKwh">Konsumsi Energi</span>
+                    <div class="bg-slate-50 dark:bg-pink-950/20 border border-slate-200 dark:border-pink-900/30 p-5 rounded-2xl">
+                        <span class="text-xs font-medium text-slate-500 dark:text-pink-200/70" data-i18n="totalKwh">Konsumsi Energi</span>
                         <div class="flex items-baseline gap-2 mt-2">
-                            <span id="total-kwh" class="text-3xl font-extrabold text-emerald-600 dark:text-emerald-400">0.0000</span>
-                            <span class="text-xs text-slate-400 dark:text-slate-500">kWh</span>
+                            <span id="total-kwh" class="text-3xl font-extrabold text-rose-600 dark:text-rose-400">0.0000</span>
+                            <span class="text-xs text-slate-400 dark:text-pink-300/50">kWh</span>
                         </div>
                     </div>
 
-                    <div class="bg-slate-50 dark:bg-slate-950/40 border border-slate-200 dark:border-slate-800/60 p-5 rounded-2xl">
-                        <span class="text-xs font-medium text-slate-500 dark:text-slate-400" data-i18n="totalCost">Estimasi Biaya Listrik</span>
+                    <div class="bg-slate-50 dark:bg-pink-950/20 border border-slate-200 dark:border-pink-900/30 p-5 rounded-2xl">
+                        <span class="text-xs font-medium text-slate-500 dark:text-pink-200/70" data-i18n="totalCost">Estimasi Biaya Listrik</span>
                         <div class="flex items-baseline gap-2 mt-2">
-                            <span id="total-biaya" class="text-3xl font-extrabold text-amber-600 dark:text-amber-400">Rp 0</span>
-                            <span class="text-xs text-slate-400 dark:text-slate-500" data-i18n="costUnit">Total</span>
+                            <span id="total-biaya" class="text-3xl font-extrabold text-purple-600 dark:text-purple-400">Rp 0</span>
+                            <span class="text-xs text-slate-400 dark:text-pink-300/50" data-i18n="costUnit">Total</span>
                         </div>
                     </div>
                 </div>
@@ -171,32 +171,32 @@
 
         <!-- ================= MENU 2: KONTROL MODE & MANUAL ================= -->
         <section id="content-control" class="hidden space-y-6">
-            <div class="bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800/80 backdrop-blur-xl p-6 md:p-8 rounded-3xl shadow-xl max-w-2xl mx-auto space-y-6 transition-colors duration-300">
+            <div class="bg-white dark:bg-[#130b18]/60 border border-slate-200 dark:border-pink-950/60 backdrop-blur-xl p-6 md:p-8 rounded-3xl shadow-xl max-w-2xl mx-auto space-y-6 transition-colors duration-300">
                 <div>
                     <h2 class="text-lg font-bold text-slate-900 dark:text-white" data-i18n="controlTitle">Panel Kontrol Operasional</h2>
-                    <p class="text-xs text-slate-500 dark:text-slate-400" data-i18n="controlSub">Pilih mode otomatis sensor atau kendalikan lampu secara manual</p>
+                    <p class="text-xs text-slate-500 dark:text-pink-300/60" data-i18n="controlSub">Pilih mode otomatis sensor atau kendalikan lampu secara manual</p>
                 </div>
 
                 <div class="space-y-4">
-                    <div class="p-4 bg-slate-50 dark:bg-slate-950/50 border border-slate-200 dark:border-slate-800 rounded-2xl flex justify-between items-center">
+                    <div class="p-4 bg-slate-50 dark:bg-pink-950/20 border border-slate-200 dark:border-pink-900/30 rounded-2xl flex justify-between items-center">
                         <div>
                             <span class="text-sm font-semibold text-slate-900 dark:text-white block" data-i18n="modeSystem">Mode Sistem</span>
-                            <span class="text-xs text-slate-500 dark:text-slate-400" data-i18n="modeSub">Pilih antara kendali sensor atau saklar web</span>
+                            <span class="text-xs text-slate-500 dark:text-pink-300/60" data-i18n="modeSub">Pilih antara kendali sensor atau saklar web</span>
                         </div>
-                        <div class="flex bg-slate-200 dark:bg-slate-900 border border-slate-300 dark:border-slate-800 p-1 rounded-xl">
-                            <button onclick="setMode('otomatis')" id="btn-mode-auto" class="px-4 py-2 rounded-lg text-xs font-semibold transition-all bg-blue-600 text-white" data-i18n="btnAuto">Otomatis</button>
-                            <button onclick="setMode('manual')" id="btn-mode-manual" class="px-4 py-2 rounded-lg text-xs font-semibold transition-all text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white" data-i18n="btnManual">Manual</button>
+                        <div class="flex bg-slate-200 dark:bg-pink-950/60 border border-slate-300 dark:border-pink-900/50 p-1 rounded-xl">
+                            <button onclick="setMode('otomatis')" id="btn-mode-auto" class="px-4 py-2 rounded-lg text-xs font-semibold transition-all bg-gradient-to-r from-pink-500 to-rose-500 text-white shadow-md shadow-pink-500/20" data-i18n="btnAuto">Otomatis</button>
+                            <button onclick="setMode('manual')" id="btn-mode-manual" class="px-4 py-2 rounded-lg text-xs font-semibold transition-all text-slate-600 dark:text-pink-300/70 hover:text-slate-900 dark:hover:text-white" data-i18n="btnManual">Manual</button>
                         </div>
                     </div>
 
-                    <div id="manual-control-card" class="hidden p-4 bg-slate-50 dark:bg-slate-950/50 border border-slate-200 dark:border-slate-800 rounded-2xl flex justify-between items-center">
+                    <div id="manual-control-card" class="hidden p-4 bg-slate-50 dark:bg-pink-950/20 border border-slate-200 dark:border-pink-900/30 rounded-2xl flex justify-between items-center">
                         <div>
                             <span class="text-sm font-semibold text-slate-900 dark:text-white block" data-i18n="manualSwitch">Saklar Lampu Manual</span>
-                            <span class="text-xs text-slate-500 dark:text-slate-400" data-i18n="manualSwitchSub">Nyalakan atau matikan lampu secara langsung</span>
+                            <span class="text-xs text-slate-500 dark:text-pink-300/60" data-i18n="manualSwitchSub">Nyalakan atau matikan lampu secara langsung</span>
                         </div>
                         <label class="relative inline-flex items-center cursor-pointer">
                             <input type="checkbox" id="toggle-manual-lampu" onchange="toggleManualLamp(this)" class="sr-only peer">
-                            <div class="w-11 h-6 bg-slate-300 dark:bg-slate-800 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-emerald-600"></div>
+                            <div class="w-11 h-6 bg-slate-300 dark:bg-pink-950 border border-pink-900 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-pink-600"></div>
                         </label>
                     </div>
                 </div>
@@ -205,17 +205,17 @@
 
         <!-- ================= MENU 3: RIWAYAT HARIAN ================= -->
         <section id="content-history" class="hidden space-y-6">
-            <div class="bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800/80 backdrop-blur-xl p-6 md:p-8 rounded-3xl shadow-xl transition-colors duration-300">
+            <div class="bg-white dark:bg-[#130b18]/60 border border-slate-200 dark:border-pink-950/60 backdrop-blur-xl p-6 md:p-8 rounded-3xl shadow-xl transition-colors duration-300">
                 <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
                     <div>
                         <h2 class="text-lg font-bold text-slate-900 dark:text-white" data-i18n="historyTitle">Log Rekapitulasi Harian</h2>
-                        <p class="text-xs text-slate-500 dark:text-slate-400" data-i18n="historySub">Analisis durasi nyala dan penggunaan energi dari Firebase</p>
+                        <p class="text-xs text-slate-500 dark:text-pink-300/60" data-i18n="historySub">Analisis durasi nyala dan penggunaan energi dari Firebase</p>
                     </div>
                     <div class="flex items-center gap-2">
-                        <button onclick="downloadExcel()" class="inline-flex items-center gap-2 px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold rounded-xl transition-all shadow-lg shadow-emerald-500/20">
+                        <button onclick="downloadExcel()" class="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-pink-600 to-rose-600 hover:from-pink-500 hover:to-rose-500 text-white text-xs font-semibold rounded-xl transition-all shadow-lg shadow-pink-500/25">
                             <i data-lucide="file-spreadsheet" class="w-3.5 h-3.5"></i> <span data-i18n="downloadExcel">Download Excel</span>
                         </button>
-                        <button onclick="loadDailyHistory()" class="inline-flex items-center gap-2 px-4 py-2 bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 text-xs font-semibold rounded-xl border border-slate-300 dark:border-slate-700 transition-all">
+                        <button onclick="loadDailyHistory()" class="inline-flex items-center gap-2 px-4 py-2 bg-slate-200 dark:bg-pink-950/40 hover:bg-slate-300 dark:hover:bg-pink-900/40 text-slate-700 dark:text-pink-300 text-xs font-semibold rounded-xl border border-slate-300 dark:border-pink-900/40 transition-all">
                             <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i> Refresh
                         </button>
                     </div>
@@ -224,15 +224,15 @@
                 <div class="overflow-x-auto">
                     <table class="w-full text-left border-collapse">
                         <thead>
-                            <tr class="border-b border-slate-200 dark:border-slate-800 text-slate-500 dark:text-slate-400 text-xs font-semibold uppercase tracking-wider">
+                            <tr class="border-b border-slate-200 dark:border-pink-950 text-slate-500 dark:text-pink-300/70 text-xs font-semibold uppercase tracking-wider">
                                 <th class="pb-3 px-4" data-i18n="thDate">Tanggal</th>
                                 <th class="pb-3 px-4" data-i18n="thDuration">Total Durasi</th>
                                 <th class="pb-3 px-4" data-i18n="thEnergy">Konsumsi (kWh)</th>
                                 <th class="pb-3 px-4" data-i18n="thCost">Estimasi Biaya</th>
                             </tr>
                         </thead>
-                        <tbody id="daily-table-body" class="divide-y divide-slate-200 dark:divide-slate-800/60 text-sm text-slate-700 dark:text-slate-300">
-                            <tr><td colspan="4" class="text-center py-8 text-slate-400 dark:text-slate-500" data-i18n="loadingData">Memuat data riwayat...</td></tr>
+                        <tbody id="daily-table-body" class="divide-y divide-slate-200 dark:divide-pink-950/40 text-sm text-slate-700 dark:text-slate-300">
+                            <tr><td colspan="4" class="text-center py-8 text-slate-400 dark:text-pink-300/40" data-i18n="loadingData">Memuat data riwayat...</td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -241,33 +241,33 @@
 
         <!-- ================= MENU 4: PENGATURAN ================= -->
         <section id="content-settings" class="hidden space-y-6">
-            <div class="bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800/80 backdrop-blur-xl p-6 md:p-8 rounded-3xl shadow-xl max-w-xl mx-auto space-y-5 transition-colors duration-300">
+            <div class="bg-white dark:bg-[#130b18]/60 border border-slate-200 dark:border-pink-950/60 backdrop-blur-xl p-6 md:p-8 rounded-3xl shadow-xl max-w-xl mx-auto space-y-5 transition-colors duration-300">
                 <div>
                     <h2 class="text-lg font-bold text-slate-900 dark:text-white" data-i18n="settingsTitle">Konfigurasi Sistem</h2>
-                    <p class="text-xs text-slate-500 dark:text-slate-400" data-i18n="settingsSub">Sesuaikan parameter kalkulator energi dan bahasa</p>
+                    <p class="text-xs text-slate-500 dark:text-pink-300/60" data-i18n="settingsSub">Sesuaikan parameter kalkulator energi dan bahasa</p>
                 </div>
 
                 <div class="space-y-4">
                     <!-- Pilihan Bahasa -->
                     <div>
-                        <label class="block text-xs font-medium text-slate-700 dark:text-slate-300 mb-2" data-i18n="langLabel">Bahasa (Language)</label>
-                        <select id="select-lang" onchange="changeLanguage(this.value)" class="w-full bg-slate-50 dark:bg-slate-950/60 border border-slate-300 dark:border-slate-800 rounded-xl px-4 py-3 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-blue-500">
-                            <option value="id">Bahasa Indonesia</option>
-                            <option value="en">English</option>
+                        <label class="block text-xs font-medium text-slate-700 dark:text-pink-200 mb-2" data-i18n="langLabel">Bahasa (Language)</label>
+                        <select id="select-lang" onchange="changeLanguage(this.value)" class="w-full bg-slate-50 dark:bg-pink-950/30 border border-slate-300 dark:border-pink-900/50 rounded-xl px-4 py-3 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-pink-500">
+                            <option value="id" class="dark:bg-[#160d1d]">Bahasa Indonesia</option>
+                            <option value="en" class="dark:bg-[#160d1d]">English</option>
                         </select>
                     </div>
 
                     <div>
-                        <label class="block text-xs font-medium text-slate-700 dark:text-slate-300 mb-2" data-i18n="wattLabel">Daya Lampu (Watt)</label>
-                        <input type="number" id="input-watt" value="10" class="w-full bg-slate-50 dark:bg-slate-950/60 border border-slate-300 dark:border-slate-800 rounded-xl px-4 py-3 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-blue-500">
+                        <label class="block text-xs font-medium text-slate-700 dark:text-pink-200 mb-2" data-i18n="wattLabel">Daya Lampu (Watt)</label>
+                        <input type="number" id="input-watt" value="10" class="w-full bg-slate-50 dark:bg-pink-950/30 border border-slate-300 dark:border-pink-900/50 rounded-xl px-4 py-3 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-pink-500">
                     </div>
 
                     <div>
-                        <label class="block text-xs font-medium text-slate-700 dark:text-slate-300 mb-2" data-i18n="tarifLabel">Tarif Listrik per kWh (Rp)</label>
-                        <input type="number" id="input-tarif" value="1444" class="w-full bg-slate-50 dark:bg-slate-950/60 border border-slate-300 dark:border-slate-800 rounded-xl px-4 py-3 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-blue-500">
+                        <label class="block text-xs font-medium text-slate-700 dark:text-pink-200 mb-2" data-i18n="tarifLabel">Tarif Listrik per kWh (Rp)</label>
+                        <input type="number" id="input-tarif" value="1444" class="w-full bg-slate-50 dark:bg-pink-950/30 border border-slate-300 dark:border-pink-900/50 rounded-xl px-4 py-3 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-pink-500">
                     </div>
 
-                    <button onclick="saveSettings()" class="w-full py-3 bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-xl text-sm transition-all shadow-lg shadow-blue-500/25" data-i18n="saveBtn">
+                    <button onclick="saveSettings()" class="w-full py-3 bg-gradient-to-r from-pink-600 to-rose-600 hover:from-pink-500 hover:to-rose-500 text-white font-semibold rounded-xl text-sm transition-all shadow-lg shadow-pink-500/25" data-i18n="saveBtn">
                         Simpan Pengaturan
                     </button>
                 </div>
@@ -277,7 +277,7 @@
     </main>
 
     <!-- Footer -->
-    <footer class="border-t border-slate-200 dark:border-slate-800/80 py-6 text-center text-xs text-slate-500 dark:text-slate-400 transition-colors duration-300">
+    <footer class="border-t border-slate-200 dark:border-pink-950/60 py-6 text-center text-xs text-slate-500 dark:text-pink-300/50 transition-colors duration-300">
         <p>&copy; 2026 Smart Lighting IoT &bull; Powered by Firebase Cloud</p>
     </footer>
 
@@ -482,13 +482,13 @@
             const labelModeStatus = document.getElementById('label-mode-status');
 
             if (mode === 'manual') {
-                btnManual.className = "px-4 py-2 rounded-lg text-xs font-semibold transition-all bg-blue-600 text-white";
-                btnAuto.className = "px-4 py-2 rounded-lg text-xs font-semibold transition-all text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white";
+                btnManual.className = "px-4 py-2 rounded-lg text-xs font-semibold transition-all bg-gradient-to-r from-pink-500 to-rose-500 text-white shadow-md shadow-pink-500/20";
+                btnAuto.className = "px-4 py-2 rounded-lg text-xs font-semibold transition-all text-slate-600 dark:text-pink-300/70 hover:text-slate-900 dark:hover:text-white";
                 manualCard.classList.remove('hidden');
                 labelModeStatus.innerText = currentLang === 'id' ? "Mode: Manual (Kontrol Web)" : "Mode: Manual (Web Control)";
             } else {
-                btnAuto.className = "px-4 py-2 rounded-lg text-xs font-semibold transition-all bg-blue-600 text-white";
-                btnManual.className = "px-4 py-2 rounded-lg text-xs font-semibold transition-all text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white";
+                btnAuto.className = "px-4 py-2 rounded-lg text-xs font-semibold transition-all bg-gradient-to-r from-pink-500 to-rose-500 text-white shadow-md shadow-pink-500/20";
+                btnManual.className = "px-4 py-2 rounded-lg text-xs font-semibold transition-all text-slate-600 dark:text-pink-300/70 hover:text-slate-900 dark:hover:text-white";
                 manualCard.classList.add('hidden');
                 labelModeStatus.innerText = currentLang === 'id' ? "Mode: Otomatis (LDR + PIR)" : "Mode: Automatic (LDR + PIR)";
             }
@@ -533,8 +533,8 @@
                 dot.className = "w-2 h-2 rounded-full bg-emerald-500 animate-pulse";
                 text.innerText = translations[currentLang].pirDetected;
             } else {
-                badge.className = "inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold tracking-wider uppercase bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border border-slate-300 dark:border-slate-700";
-                dot.className = "w-2 h-2 rounded-full bg-slate-400 dark:bg-slate-500";
+                badge.className = "inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold tracking-wider uppercase bg-slate-200 dark:bg-pink-950/60 text-slate-600 dark:text-pink-300 border border-slate-300 dark:border-pink-900/50";
+                dot.className = "w-2 h-2 rounded-full bg-slate-400 dark:bg-pink-400";
                 text.innerText = translations[currentLang].pirEmpty;
             }
         });
@@ -581,7 +581,7 @@
                 dailyReportData = [];
 
                 if (!data) {
-                    tbody.innerHTML = `<tr><td colspan="4" class="text-center py-8 text-slate-400 dark:text-slate-500">${translations[currentLang].loadingData}</td></tr>`;
+                    tbody.innerHTML = `<tr><td colspan="4" class="text-center py-8 text-slate-400 dark:text-pink-300/40">${translations[currentLang].loadingData}</td></tr>`;
                     return;
                 }
 
@@ -615,7 +615,6 @@
                     let kwh = (dayaLampuWatt * jam) / 1000;
                     let biaya = kwh * tarifPerKwh;
 
-                    // Simpan ke array untuk export Excel
                     dailyReportData.push({
                         date: date,
                         hours: jam,
@@ -624,11 +623,11 @@
                     });
 
                     html += `
-                        <tr class="hover:bg-slate-100 dark:hover:bg-slate-800/40 transition-colors">
+                        <tr class="hover:bg-slate-100 dark:hover:bg-pink-950/30 transition-colors">
                             <td class="py-4 px-4 font-medium text-slate-900 dark:text-white">${date}</td>
-                            <td class="py-4 px-4 text-blue-600 dark:text-blue-400 font-semibold">${jam.toFixed(2)} ${translations[currentLang].hoursUnit}</td>
-                            <td class="py-4 px-4 text-emerald-600 dark:text-emerald-400 font-semibold">${kwh.toFixed(4)} kWh</td>
-                            <td class="py-4 px-4 text-amber-600 dark:text-amber-400 font-semibold">Rp ${Math.round(biaya).toLocaleString('id-ID')}</td>
+                            <td class="py-4 px-4 text-pink-600 dark:text-pink-400 font-semibold">${jam.toFixed(2)} ${translations[currentLang].hoursUnit}</td>
+                            <td class="py-4 px-4 text-rose-600 dark:text-rose-400 font-semibold">${kwh.toFixed(4)} kWh</td>
+                            <td class="py-4 px-4 text-purple-600 dark:text-purple-400 font-semibold">Rp ${Math.round(biaya).toLocaleString('id-ID')}</td>
                         </tr>
                     `;
                 });
@@ -637,7 +636,6 @@
             });
         }
 
-        // Fungsi untuk mengunduh laporan ke format Excel (.xlsx)
         function downloadExcel() {
             if (!dailyReportData || dailyReportData.length === 0) {
                 alert(translations[currentLang].noDataExcel);
@@ -655,7 +653,6 @@
             const workbook = XLSX.utils.book_new();
             XLSX.utils.book_append_sheet(workbook, worksheet, "Rekap Harian");
 
-            // Unduh file dengan nama Laporan_Smart_Lighting_IoT.xlsx
             XLSX.writeFile(workbook, "Laporan_Smart_Lighting_IoT.xlsx");
         }
 
