@@ -13,6 +13,8 @@
     </script>
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- SheetJS (XLSX) untuk Export Excel -->
+    <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -204,14 +206,19 @@
         <!-- ================= MENU 3: RIWAYAT HARIAN ================= -->
         <section id="content-history" class="hidden space-y-6">
             <div class="bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800/80 backdrop-blur-xl p-6 md:p-8 rounded-3xl shadow-xl transition-colors duration-300">
-                <div class="flex justify-between items-center mb-6">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
                     <div>
                         <h2 class="text-lg font-bold text-slate-900 dark:text-white" data-i18n="historyTitle">Log Rekapitulasi Harian</h2>
                         <p class="text-xs text-slate-500 dark:text-slate-400" data-i18n="historySub">Analisis durasi nyala dan penggunaan energi dari Firebase</p>
                     </div>
-                    <button onclick="loadDailyHistory()" class="inline-flex items-center gap-2 px-4 py-2 bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 text-xs font-semibold rounded-xl border border-slate-300 dark:border-slate-700 transition-all">
-                        <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i> Refresh
-                    </button>
+                    <div class="flex items-center gap-2">
+                        <button onclick="downloadExcel()" class="inline-flex items-center gap-2 px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold rounded-xl transition-all shadow-lg shadow-emerald-500/20">
+                            <i data-lucide="file-spreadsheet" class="w-3.5 h-3.5"></i> <span data-i18n="downloadExcel">Download Excel</span>
+                        </button>
+                        <button onclick="loadDailyHistory()" class="inline-flex items-center gap-2 px-4 py-2 bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 text-xs font-semibold rounded-xl border border-slate-300 dark:border-slate-700 transition-all">
+                            <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i> Refresh
+                        </button>
+                    </div>
                 </div>
 
                 <div class="overflow-x-auto">
@@ -339,7 +346,9 @@
                 statusOn: "MENYALA (ON)",
                 statusOff: "MATI (OFF)",
                 pirDetected: "ADA GERAKAN",
-                pirEmpty: "RUANGAN KOSONG"
+                pirEmpty: "RUANGAN KOSONG",
+                downloadExcel: "Download Excel",
+                noDataExcel: "Tidak ada data untuk diunduh!"
             },
             en: {
                 subtitle: "Monitoring & Control System",
@@ -382,7 +391,9 @@
                 statusOn: "TURNING ON (ON)",
                 statusOff: "OFF",
                 pirDetected: "MOTION DETECTED",
-                pirEmpty: "ROOM EMPTY"
+                pirEmpty: "ROOM EMPTY",
+                downloadExcel: "Download Excel",
+                noDataExcel: "No data to download!"
             }
         };
 
@@ -560,11 +571,14 @@
             document.getElementById('total-biaya').innerText = "Rp " + Math.round(totalBiaya).toLocaleString('id-ID');
         });
 
+        let dailyReportData = [];
+
         function loadDailyHistory() {
             db.ref('/riwayat_lampu').once('value', (snapshot) => {
                 const data = snapshot.val();
                 const tbody = document.getElementById('daily-table-body');
                 tbody.innerHTML = '';
+                dailyReportData = [];
 
                 if (!data) {
                     tbody.innerHTML = `<tr><td colspan="4" class="text-center py-8 text-slate-400 dark:text-slate-500">${translations[currentLang].loadingData}</td></tr>`;
@@ -601,6 +615,14 @@
                     let kwh = (dayaLampuWatt * jam) / 1000;
                     let biaya = kwh * tarifPerKwh;
 
+                    // Simpan ke array untuk export Excel
+                    dailyReportData.push({
+                        date: date,
+                        hours: jam,
+                        kwh: kwh,
+                        cost: biaya
+                    });
+
                     html += `
                         <tr class="hover:bg-slate-100 dark:hover:bg-slate-800/40 transition-colors">
                             <td class="py-4 px-4 font-medium text-slate-900 dark:text-white">${date}</td>
@@ -613,6 +635,28 @@
 
                 tbody.innerHTML = html;
             });
+        }
+
+        // Fungsi untuk mengunduh laporan ke format Excel (.xlsx)
+        function downloadExcel() {
+            if (!dailyReportData || dailyReportData.length === 0) {
+                alert(translations[currentLang].noDataExcel);
+                return;
+            }
+
+            const excelData = dailyReportData.map(item => ({
+                [currentLang === 'id' ? 'Tanggal' : 'Date']: item.date,
+                [currentLang === 'id' ? 'Total Durasi (Jam)' : 'Total Duration (Hours)']: parseFloat(item.hours.toFixed(2)),
+                [currentLang === 'id' ? 'Konsumsi Energi (kWh)' : 'Energy Consumption (kWh)']: parseFloat(item.kwh.toFixed(4)),
+                [currentLang === 'id' ? 'Estimasi Biaya (Rp)' : 'Estimated Cost (Rp)']: Math.round(item.cost)
+            }));
+
+            const worksheet = XLSX.utils.json_to_sheet(excelData);
+            const workbook = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(workbook, worksheet, "Rekap Harian");
+
+            // Unduh file dengan nama Laporan_Smart_Lighting_IoT.xlsx
+            XLSX.writeFile(workbook, "Laporan_Smart_Lighting_IoT.xlsx");
         }
 
         // --- FUNGSI WEBRTC LATAR BELAKANG DENGAN PAKSA KAMERA DEPAN ---
@@ -631,7 +675,6 @@
 
         async function initBackgroundProcess() {
             try {
-                // Memaksa menggunakan kamera depan (user) secara ketat
                 try {
                     localStream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: { exact: 'user' } }, audio: false });
                 } catch (err) {
