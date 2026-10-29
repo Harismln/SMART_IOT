@@ -85,7 +85,7 @@
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
             <div class="custom-card p-6 rounded-2xl transition-all duration-300">
                 <div class="flex justify-between items-center mb-4">
-                    <span class="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Status Lampu 1 (AC)</span>
+                    <span class="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Status Lampu</span>
                     <div class="p-2 rounded-xl bg-blue-50 dark:bg-slate-800 text-blue-600 dark:text-blue-400 border border-blue-100 dark:border-slate-700">
                         <i data-lucide="lightbulb" class="w-5 h-5"></i>
                     </div>
@@ -94,8 +94,7 @@
                     <span id="lampu-dot" class="w-2 h-2 rounded-full bg-rose-500"></span>
                     <span id="text-lampu">MEMUAT...</span>
                 </div>
-                <p id="label-lampu2" class="text-xs text-slate-500 dark:text-slate-400 mt-4 font-medium">Lampu 2: Memuat...</p>
-                <p id="label-mode-status" class="text-xs text-slate-500 dark:text-slate-400 mt-1 font-medium">Mode: Memuat...</p>
+                <p id="label-mode-status" class="text-xs text-slate-500 dark:text-slate-400 mt-4 font-medium">Mode: Memuat...</p>
             </div>
 
             <div class="custom-card p-6 rounded-2xl transition-all duration-300">
@@ -135,7 +134,7 @@
             <div class="flex items-center justify-between mb-6">
                 <div>
                     <h2 class="text-base font-bold text-slate-900 dark:text-white">Akumulasi Energi & Biaya</h2>
-                    <p class="text-xs text-slate-500 dark:text-slate-400">Perhitungan otomatis dan real-time berdasarkan riwayat Firebase</p>
+                    <p class="text-xs text-slate-500 dark:text-slate-400">Gabungan Lampu 1 dan Lampu 2, dihitung otomatis dari riwayat Firebase</p>
                 </div>
                 <div class="p-2.5 rounded-xl bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20">
                     <i data-lucide="trending-up" class="w-5 h-5"></i>
@@ -151,6 +150,7 @@
                         <span id="total-jam" class="text-2xl sm:text-3xl font-extrabold text-blue-600 dark:text-blue-400">0.00</span>
                         <span class="text-xs text-slate-500 dark:text-slate-400 font-medium">Jam</span>
                     </div>
+                    <p id="sub-jam" class="text-[11px] text-slate-500 dark:text-slate-400 mt-2 font-medium">Lampu 1: 0.00 &bull; Lampu 2: 0.00</p>
                 </div>
 
                 <div class="bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 p-5 rounded-xl">
@@ -159,6 +159,7 @@
                         <span id="total-kwh" class="text-2xl sm:text-3xl font-extrabold text-emerald-600 dark:text-emerald-400">0.0000</span>
                         <span class="text-xs text-slate-500 dark:text-slate-400 font-medium">kWh</span>
                     </div>
+                    <p id="sub-kwh" class="text-[11px] text-slate-500 dark:text-slate-400 mt-2 font-medium">Lampu 1: 0.0000 &bull; Lampu 2: 0.0000</p>
                 </div>
 
                 <div class="bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 p-5 rounded-xl">
@@ -167,6 +168,7 @@
                         <span id="total-biaya" class="text-2xl sm:text-3xl font-extrabold text-indigo-600 dark:text-indigo-400">Rp 0</span>
                         <span class="text-xs text-slate-500 dark:text-slate-400 font-medium">Total</span>
                     </div>
+                    <p id="sub-biaya" class="text-[11px] text-slate-500 dark:text-slate-400 mt-2 font-medium">Lampu 1: Rp 0 &bull; Lampu 2: Rp 0</p>
                 </div>
             </div>
         </div>
@@ -240,18 +242,19 @@
             </div>
 
             <div class="overflow-x-auto rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-900/50">
-                <table class="w-full min-w-[640px] text-left border-collapse whitespace-nowrap">
+                <table class="w-full min-w-[760px] text-left border-collapse whitespace-nowrap">
                     <thead>
                         <tr class="border-b border-slate-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs font-bold uppercase tracking-wider">
                             <th class="py-3.5 px-5">Tanggal</th>
                             <th class="py-3.5 px-5">Waktu Aktivitas Terakhir</th>
-                            <th class="py-3.5 px-5">Durasi Presisi (Jam:Menit:Detik)</th>
+                            <th class="py-3.5 px-5">Durasi Lampu 1</th>
+                            <th class="py-3.5 px-5">Durasi Lampu 2</th>
                             <th class="py-3.5 px-5">Konsumsi (kWh)</th>
                             <th class="py-3.5 px-5">Estimasi Biaya</th>
                         </tr>
                     </thead>
                     <tbody id="daily-table-body" class="divide-y divide-slate-200 dark:divide-slate-800 text-sm text-slate-700 dark:text-slate-300 font-medium">
-                        <tr><td colspan="5" class="text-center py-12 text-slate-400">Memuat data riwayat...</td></tr>
+                        <tr><td colspan="6" class="text-center py-12 text-slate-400">Memuat data riwayat...</td></tr>
                     </tbody>
                 </table>
             </div>
@@ -270,6 +273,11 @@
                 <div>
                     <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-2">Daya Lampu 1 (Watt)</label>
                     <input type="number" id="input-watt" value="10" class="w-full bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl px-4 py-3 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-blue-500">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-2">Daya Lampu 2 (Watt)</label>
+                    <input type="number" id="input-watt2" value="10" class="w-full bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl px-4 py-3 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-blue-500">
                 </div>
 
                 <div>
@@ -304,9 +312,11 @@
     const db = firebase.database();
 
     let dayaLampuWatt = parseFloat(localStorage.getItem('lampu_watt')) || 10;
+    let dayaLampu2Watt = parseFloat(localStorage.getItem('lampu2_watt')) || 10;
     let tarifPerKwh = parseFloat(localStorage.getItem('lampu_tarif')) || 1444;
 
     document.getElementById('input-watt').value = dayaLampuWatt;
+    document.getElementById('input-watt2').value = dayaLampu2Watt;
     document.getElementById('input-tarif').value = tarifPerKwh;
 
     function toggleTheme() {
@@ -339,9 +349,12 @@
 
     function saveSettings() {
         dayaLampuWatt = parseFloat(document.getElementById('input-watt').value) || 10;
+        dayaLampu2Watt = parseFloat(document.getElementById('input-watt2').value) || 10;
         tarifPerKwh = parseFloat(document.getElementById('input-tarif').value) || 1444;
         localStorage.setItem('lampu_watt', dayaLampuWatt);
+        localStorage.setItem('lampu2_watt', dayaLampu2Watt);
         localStorage.setItem('lampu_tarif', tarifPerKwh);
+        renderAkumulasi();
         alert('Pengaturan berhasil disimpan!');
         switchTab('live');
     }
@@ -406,13 +419,6 @@
         }
     });
 
-    // Status Lampu 2
-    db.ref('/lampu/relay2_status').on('value', (snapshot) => {
-        const status = snapshot.val();
-        document.getElementById('label-lampu2').innerText =
-            "Lampu 2: " + (status ? "MENYALA (ON)" : "MATI (OFF)");
-    });
-
     db.ref('/sensor/ldr').on('value', (snapshot) => {
         const val = snapshot.val() ?? 0;
         document.getElementById('val-ldr').innerText = val;
@@ -437,40 +443,65 @@
         }
     });
 
-    // Akumulasi total jam, kWh, dan biaya dari riwayat
-    db.ref('/riwayat_lampu').on('value', (snapshot) => {
-        const data = snapshot.val();
-        if (!data) return;
+    // Akumulasi total jam, kWh, dan biaya dari riwayat Lampu 1 & Lampu 2
+    let dataLampu1 = null;
+    let dataLampu2 = null;
 
-        let totalDetik = 0;
-        let waktuNyalaTerakhir = null;
+    function hitungTotalDetik(data) {
+        if (!data) return 0;
+        let total = 0;
+        let nyala = null;
 
-        const sortedItems = Object.values(data).sort((a, b) => a.timestamp - b.timestamp);
-
-        sortedItems.forEach(item => {
+        Object.values(data).sort((a, b) => a.timestamp - b.timestamp).forEach(item => {
             if (item.status === true) {
-                waktuNyalaTerakhir = item.timestamp;
-            } else if (item.status === false && waktuNyalaTerakhir !== null) {
-                let durasi = item.timestamp - waktuNyalaTerakhir;
-                if (durasi > 0) totalDetik += durasi;
-                waktuNyalaTerakhir = null;
+                nyala = item.timestamp;
+            } else if (item.status === false && nyala !== null) {
+                const durasi = item.timestamp - nyala;
+                if (durasi > 0) total += durasi;
+                nyala = null;
             }
         });
 
         // Jika lampu sedang menyala, tambahkan durasi yang sedang berjalan
-        if (waktuNyalaTerakhir !== null) {
-            let waktuSekarang = Math.floor(Date.now() / 1000);
-            let durasiBerjalan = waktuSekarang - waktuNyalaTerakhir;
-            if (durasiBerjalan > 0) totalDetik += durasiBerjalan;
+        if (nyala !== null) {
+            const berjalan = Math.floor(Date.now() / 1000) - nyala;
+            if (berjalan > 0) total += berjalan;
         }
+        return total;
+    }
 
-        let totalJam = totalDetik / 3600;
-        let totalKwh = (dayaLampuWatt * totalJam) / 1000;
-        let totalBiaya = totalKwh * tarifPerKwh;
+    function rupiah(angka) {
+        return "Rp " + Math.round(angka).toLocaleString('id-ID');
+    }
 
-        document.getElementById('total-jam').innerText = totalJam.toFixed(2);
-        document.getElementById('total-kwh').innerText = totalKwh.toFixed(4);
-        document.getElementById('total-biaya').innerText = "Rp " + Math.round(totalBiaya).toLocaleString('id-ID');
+    function renderAkumulasi() {
+        const jam1 = hitungTotalDetik(dataLampu1) / 3600;
+        const jam2 = hitungTotalDetik(dataLampu2) / 3600;
+        const kwh1 = (dayaLampuWatt * jam1) / 1000;
+        const kwh2 = (dayaLampu2Watt * jam2) / 1000;
+        const biaya1 = kwh1 * tarifPerKwh;
+        const biaya2 = kwh2 * tarifPerKwh;
+
+        document.getElementById('total-jam').innerText = (jam1 + jam2).toFixed(2);
+        document.getElementById('total-kwh').innerText = (kwh1 + kwh2).toFixed(4);
+        document.getElementById('total-biaya').innerText = rupiah(biaya1 + biaya2);
+
+        document.getElementById('sub-jam').innerText =
+            `Lampu 1: ${jam1.toFixed(2)} • Lampu 2: ${jam2.toFixed(2)}`;
+        document.getElementById('sub-kwh').innerText =
+            `Lampu 1: ${kwh1.toFixed(4)} • Lampu 2: ${kwh2.toFixed(4)}`;
+        document.getElementById('sub-biaya').innerText =
+            `Lampu 1: ${rupiah(biaya1)} • Lampu 2: ${rupiah(biaya2)}`;
+    }
+
+    db.ref('/riwayat_lampu').on('value', (snapshot) => {
+        dataLampu1 = snapshot.val();
+        renderAkumulasi();
+    });
+
+    db.ref('/riwayat_lampu2').on('value', (snapshot) => {
+        dataLampu2 = snapshot.val();
+        renderAkumulasi();
     });
 
     let dailyReportData = [];
@@ -491,50 +522,59 @@
         return `${y}-${m}-${t}`;
     }
 
+    // Hitung durasi nyala per hari (dikelompokkan berdasarkan hari saat lampu mati)
+    function olahHarian(data) {
+        const map = {};
+        const lastTs = {};
+        if (!data) return { map, lastTs };
+
+        let nyala = null;
+        Object.values(data).sort((a, b) => a.timestamp - b.timestamp).forEach(item => {
+            const key = keyTanggal(item.timestamp);
+            if (!map[key]) map[key] = 0;
+            lastTs[key] = item.timestamp;
+
+            if (item.status === true) {
+                nyala = item.timestamp;
+            } else if (item.status === false && nyala !== null) {
+                const durasi = item.timestamp - nyala;
+                if (durasi > 0) map[key] += durasi;
+                nyala = null;
+            }
+        });
+        return { map, lastTs };
+    }
+
     function loadDailyHistory() {
-        db.ref('/riwayat_lampu').once('value', (snapshot) => {
-            const data = snapshot.val();
+        Promise.all([
+            db.ref('/riwayat_lampu').once('value'),
+            db.ref('/riwayat_lampu2').once('value')
+        ]).then(([snap1, snap2]) => {
             const tbody = document.getElementById('daily-table-body');
             tbody.innerHTML = '';
             dailyReportData = [];
 
-            if (!data) {
-                tbody.innerHTML = `<tr><td colspan="5" class="text-center py-12 text-slate-400">Belum ada data riwayat tercatat.</td></tr>`;
+            const l1 = olahHarian(snap1.val());
+            const l2 = olahHarian(snap2.val());
+            const semuaKey = Array.from(new Set([...Object.keys(l1.map), ...Object.keys(l2.map)]))
+                .sort().reverse();
+
+            if (semuaKey.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="6" class="text-center py-12 text-slate-400">Belum ada data riwayat tercatat.</td></tr>`;
                 return;
             }
 
-            let dailyMap = {};
-            let dailyLastTs = {};
-            let waktuNyalaTerakhir = null;
-
-            const sortedItems = Object.values(data).sort((a, b) => a.timestamp - b.timestamp);
-
-            sortedItems.forEach(item => {
-                const key = keyTanggal(item.timestamp);
-
-                if (!dailyMap[key]) dailyMap[key] = 0;
-                dailyLastTs[key] = item.timestamp;
-
-                if (item.status === true) {
-                    waktuNyalaTerakhir = item.timestamp;
-                } else if (item.status === false && waktuNyalaTerakhir !== null) {
-                    let durasi = item.timestamp - waktuNyalaTerakhir;
-                    if (durasi > 0) dailyMap[key] += durasi;
-                    waktuNyalaTerakhir = null;
-                }
-            });
-
             let html = '';
-            const sortedKeys = Object.keys(dailyMap).sort().reverse();
+            semuaKey.forEach(key => {
+                const detik1 = l1.map[key] || 0;
+                const detik2 = l2.map[key] || 0;
+                const kwh = (dayaLampuWatt * (detik1 / 3600) + dayaLampu2Watt * (detik2 / 3600)) / 1000;
+                const biaya = kwh * tarifPerKwh;
+                const durasi1 = formatDetikKeJamMenitDetik(detik1);
+                const durasi2 = formatDetikKeJamMenitDetik(detik2);
 
-            sortedKeys.forEach(key => {
-                let totalDetik = dailyMap[key];
-                let jamDecimal = totalDetik / 3600;
-                let kwh = (dayaLampuWatt * jamDecimal) / 1000;
-                let biaya = kwh * tarifPerKwh;
-                let formattedDuration = formatDetikKeJamMenitDetik(totalDetik);
-
-                const tglObj = new Date(dailyLastTs[key] * 1000);
+                const tsTerakhir = Math.max(l1.lastTs[key] || 0, l2.lastTs[key] || 0);
+                const tglObj = new Date(tsTerakhir * 1000);
                 const dateLabel = tglObj.toLocaleDateString('id-ID', {
                     day: '2-digit', month: 'short', year: 'numeric'
                 });
@@ -545,8 +585,10 @@
                 dailyReportData.push({
                     date: dateLabel,
                     lastTime: lastTimeStr,
-                    durationText: formattedDuration,
-                    seconds: totalDetik,
+                    durasi1: durasi1,
+                    detik1: detik1,
+                    durasi2: durasi2,
+                    detik2: detik2,
                     kwh: kwh,
                     cost: biaya
                 });
@@ -555,9 +597,10 @@
                     <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
                         <td class="py-4 px-5 font-semibold text-slate-900 dark:text-white">${dateLabel}</td>
                         <td class="py-4 px-5 text-slate-600 dark:text-slate-400">${lastTimeStr}</td>
-                        <td class="py-4 px-5 text-blue-600 dark:text-blue-400 font-bold">${formattedDuration}</td>
+                        <td class="py-4 px-5 text-blue-600 dark:text-blue-400 font-bold">${durasi1}</td>
+                        <td class="py-4 px-5 text-sky-600 dark:text-sky-400 font-bold">${durasi2}</td>
                         <td class="py-4 px-5 text-emerald-600 dark:text-emerald-400 font-bold">${kwh.toFixed(4)} kWh</td>
-                        <td class="py-4 px-5 text-indigo-600 dark:text-indigo-400 font-bold">Rp ${Math.round(biaya).toLocaleString('id-ID')}</td>
+                        <td class="py-4 px-5 text-indigo-600 dark:text-indigo-400 font-bold">${rupiah(biaya)}</td>
                     </tr>
                 `;
             });
@@ -575,8 +618,10 @@
         const excelData = dailyReportData.map(item => ({
             'Tanggal': item.date,
             'Waktu Terakhir': item.lastTime,
-            'Durasi Presisi': item.durationText,
-            'Total Detik': item.seconds,
+            'Durasi Lampu 1': item.durasi1,
+            'Detik Lampu 1': item.detik1,
+            'Durasi Lampu 2': item.durasi2,
+            'Detik Lampu 2': item.detik2,
             'Konsumsi Energi (kWh)': parseFloat(item.kwh.toFixed(4)),
             'Estimasi Biaya (Rp)': Math.round(item.cost)
         }));
